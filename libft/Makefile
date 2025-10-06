@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcalon <jcalon@student.42.fr>              +#+  +:+       +#+         #
+#    By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/02 01:28:06 by crazyd            #+#    #+#              #
-#    Updated: 2022/06/05 19:05:22 by jcalon           ###   ########.fr        #
+#    Updated: 2025/10/06 17:04:51 by mari-cruz        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ SRCS = ft_bzero.c		\
 		ft_print_conv_2.c \
 		get_next_line.c	\
 		ft_strcpy.c		\
-		ft_cmp.c
+		ft_cmp.c		\
+		ft_realloc.c
 
 SRCSB = ft_lstnew.c	\
 		ft_lstadd_back.c	\

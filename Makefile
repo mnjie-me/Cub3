@@ -1,7 +1,7 @@
 NAME	= cub3
 
-SRCS 	= srcs/cub3.c srcs/parser/parse_scene.c srcs/parser/utils_scene.c srcs/parser/utils_config.c \
-			srcs/parser/parse_elements.c
+SRCS 	= srcs/cub3.c srcs/parser/parse_scene.c srcs/parser/utils_scene.c srcs/parser/utils_elements.c \
+			srcs/parser/parse_elements.c srcs/parser/parse_map.c srcs/parser/utils_map.c
 
 OBJS 	= ${SRCS:.c=.o}
 
