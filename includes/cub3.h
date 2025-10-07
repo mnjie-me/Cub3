@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/06 23:20:08 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/07 21:45:20 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	parse_rgb(t_data *data, char *line, int *j);
 void	check_identifier(t_data *data, char **map, int *i, int *j);
 void	check_elements(t_data *data);
 void	check_map(t_data *data, char **map, int *i);
+void	validate_map(t_data *data, char **copy);
 
 // PARSER UTILS
 void		ft_destroy_img(t_data *data);
@@ -73,5 +74,6 @@ void		free_copy(char **copy, int *j);
 void		check_character(t_data *data, char **copy);
 void		check_direction(t_data *data, char **copy, int *x, int *y);
 void		check_position(t_data *data, int *x, int *y);
+int	        get_max_x(char **copy);
 
 #endif
