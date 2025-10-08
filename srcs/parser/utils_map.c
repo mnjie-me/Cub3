@@ -6,27 +6,11 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:16:37 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/07 21:41:42 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/08 16:06:21 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
-
-int	get_max_x(char **copy)
-{
-	int	y;
-	int	max;
-
-	y = 0;
-	max = 0;
-	while (copy[y])
-	{
-		if ((int)ft_strlen(copy[y]) > max)
-			max = (int)ft_strlen(copy[y]);
-		y++;
-	}
-	return (max);
-}
 
 void	check_character(t_data *data, char **copy)
 {

@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:03:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/07 22:13:39 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/08 16:33:40 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,41 @@ void	flood_fill(t_data *data, char **copy, int x, int y)
 	}
 }
 
-static void	validate_column_edges(t_data *data, char **copy, int x, int total_rows)
+static void	check_column_edges(t_data *data, char **copy, int x, int total_rows)
 {
 	int	start;
 	int	end;
 
 	start = 0;
-	while (copy[start] && (x >= (int)ft_strlen(copy[start]) || copy[start][x] == ' '))
-		start++;
+	while (start < total_rows)
+	{
+		if (x >= (int)ft_strlen(copy[start]) || copy[start][x] == ' ')
+			start++;
+		else
+			break;
+	}
+	if (start >= total_rows)
+        ft_end(data, "Error: Empty or invalid column in map");
+    printf("start column %d : '%c' \nin start line %d\n\n", x, copy[start][x], start);
+	if (start == total_rows)
+		return;
 	end = total_rows - 1;
-	while (end >= 0 && (x >= (int)ft_strlen(copy[end]) || copy[end][x] == ' '))
-		end--;
-	if (start > end)
-		ft_end(data, "Error: Empty column in map");
+	while (end >= 0)
+	{
+		if (x >= (int)ft_strlen(copy[end]) || copy[end][x] == ' ')
+			end--;
+		else
+			break;
+	}
+	if (start >= end)
+        ft_end(data, "Error: Empty or invalid column in map");
+    printf("end column %d : '%c' \nin end line %d\n\n", x, copy[end][x], end);
+	if (start >= end)
+		ft_end(data, "Error: Empty or invalid column in map");
 	if (copy[start][x] != '1' || copy[end][x] != '1')
-		ft_end(data, "Error: Map out of borders (columns)");
+		ft_end(data, "Error: Map not closed in columns");
 }
+
 
 void	validate_columns(t_data *data, char **copy)
 {
@@ -60,7 +79,7 @@ void	validate_columns(t_data *data, char **copy)
 	x = 0;
 	while (x < max_x)
 	{
-		validate_column_edges(data, copy, x, total_rows);
+		check_column_edges(data, copy, x, total_rows);
 		x++;
 	}
 }
@@ -90,6 +109,8 @@ void	validate_rows(t_data *data, char **copy)
 
 void	validate_map(t_data *data, char **copy)
 {
+	remove_newline(copy);
+	expand_tabs(copy);
 	validate_rows(data, copy);
 	validate_columns(data, copy);
 	flood_fill(data, copy, data->position.x, data->position.y);

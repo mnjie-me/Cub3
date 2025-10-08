@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/07 21:45:20 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/08 16:34:12 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ void		check_character(t_data *data, char **copy);
 void		check_direction(t_data *data, char **copy, int *x, int *y);
 void		check_position(t_data *data, int *x, int *y);
 int	        get_max_x(char **copy);
+void	    expand_tabs(char **copy);
+void        remove_newline(char **copy);
 
 #endif
