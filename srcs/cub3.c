@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:22:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/06 23:13:00 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/09 17:21:34 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ void	init_data(t_data *data)
 	data->textures.we = NULL;
 	data->textures.ea = NULL;
 	data->map = NULL;
-	data->position.x = 0;
-	data->position.y = 0;
+	data->position.pos_x = 0;
+	data->position.pos_y = 0;
 	data->position.dir_x = 0;
 	data->position.dir_x = 0;
+	data->position.plane_x = 0;
+	data->position.plane_y = 0;
 }
 
 static void	basic_error(char *str)
@@ -56,12 +58,13 @@ int	main(int argc, char *argv[])
 		basic_error("Error, write: ./cub3 SCENE.cub");
 	init_data(&data);
     parse_scene(&data, argv);
-	data.mlx = mlx_init();
+	raycast(&data);
+	/* data.mlx = mlx_init();
     data.size_x = 1024;
     data.size_y = 768;
 	data.win = mlx_new_window(data.mlx,
 			data.size_x, data.size_y, "./cub3");
 	//mlx_hook(data.win, 17, 0, cleanup_and_exit, &data);
-	mlx_loop(data.mlx);
+	mlx_loop(data.mlx); */
 	return (0);
 }

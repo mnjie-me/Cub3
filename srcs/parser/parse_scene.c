@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:56:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/06 23:56:42 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/09 15:38:02 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,12 @@ void	parse_map(char **map, t_data *data)
 		if (!map[i])
 			ft_end(data, "Error: No map found");
 		skip_spaces(map[i], &j);
-		/* if (!is_map_line(map[i]))
-		{
-			printf("line : %c\n", map[i][j]);	
-			ft_end(data, "Error: Invalid line");		
-		} */
 	}
 	if (!map[i])
 		ft_end(data, "Error: Invalid map");
 	check_map(data, map, &i);	
 }
-// mirar aquí a ver si tengo que liberar algo despues de hacer strdup;
+
 void	parse_config(char **map, t_data *data)
 {
 	int	i;

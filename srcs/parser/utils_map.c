@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:16:37 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/08 16:06:21 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/09 17:19:29 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ void	check_character(t_data *data, char **copy)
 		while (copy[y][x] && copy[y][x] != '\n')
 		{
 			skip_spaces(copy[y], &x);
-			if (ft_cmp(copy[y][x], "01NSWE") == 1)
-			{
-				printf("%c\n", copy[y][x]);	
+			if (ft_cmp(copy[y][x], "01NSWE") == 1)	
 				ft_end(data, "Error : Wrong character identifier");
-			}
 			if (ft_cmp(copy[y][x], "NSWE") == 0)
 				count++;
 			x++;
@@ -38,10 +35,21 @@ void	check_character(t_data *data, char **copy)
 		y++;
 	}
 	if (count > 1)
-		ft_end(data, "Error : More than one character");
+		ft_end(data, "Error : Too many characters");
+	if (count < 1)
+		ft_end(data, "Error : Character not found");
 }
 
-void	check_direction(t_data *data, char **copy, int *x, int *y)
+void	check_plane(t_data *data)
+{
+	double	fov;
+
+	fov = 0.66;
+	data->position.plane_x = -data->position.dir_y * fov;
+	data->position.plane_y =  data->position.dir_x * fov;
+}
+
+void	check_position(t_data *data, char **copy, int *x, int *y)
 {
 	if (copy[*y][*x] == 'N')
 	{
@@ -63,6 +71,10 @@ void	check_direction(t_data *data, char **copy, int *x, int *y)
 		data->position.dir_x = 0;
 		data->position.dir_y = 1;
 	}
+	data->position.pos_x = (double)(*x) + 0.5;
+	data->position.pos_y = (double)(*y) + 0.5;
+	check_plane(data);
+	copy[*y][*x] = '0';
 }
 
 void	free_copy(char **copy, int *j)

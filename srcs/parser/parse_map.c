@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 12:49:36 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/07 21:41:33 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/09 17:20:00 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ void	place_character(t_data *data, char **copy)
 		{
 			if (copy[y][x] == 'N' || copy[y][x] == 'S' ||
 				copy[y][x] == 'W' || copy[y][x] == 'E')
-			{
-				check_direction(data, copy, &x, &y);
-				data->position.x = (x);
-				data->position.y = (y);	
-			}
+				check_position(data, copy, &x, &y);
 			x++;
 			if (x > data->size_x)
 				data->size_x = x;

@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 15:17:06 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/05 22:33:39 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/09 15:50:06 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	parse_textures(t_data *data, char *line, int *j)
 		((id == 'N' && line[*j] == 'O') ||
         (id == 'S' && line[*j] == 'O') ||
         (id == 'W' && line[*j] == 'E') ||
-        (id == 'E' && line[*j] == 'A'))) // puede que aquí tenga que añadir "si hay un espacio despues"
+        (id == 'E' && line[*j] == 'A')))
 	{
 		(*j)++;
 		skip_spaces(line, j);

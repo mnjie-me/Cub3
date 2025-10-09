@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:03:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/08 16:33:40 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/09 15:46:33 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 
 void	flood_fill(t_data *data, char **copy, int x, int y)
 {
-	if (x < 0 || x >= data->size_x)
-		ft_end(data, "Error : Out of border");
+	if (y < 0 || y >= data->size_y)
+		ft_end(data, "Error: Out of border (y)");
 	if (x < 0 || x >= (int)ft_strlen(copy[y]))
-		ft_end(data, "Error : Open border");
-	if (copy[y][x] == ' ')
-		ft_end(data, "Error : Open border");
-	if (ft_cmp(copy[y][x], "0NSWE"))
+		ft_end(data, "Error: Out of border (x)");
+	if (copy[y][x] == ' ' || copy[y][x] == '\n')
+		ft_end(data, "Error: Open border (space)");
+	if (copy[y][x] == 'N'|| copy[y][x] == 'S' ||
+		copy[y][x] == 'W' || copy[y][x] == 'E' ||
+		copy[y][x] == '0')
 	{
+		printf("cordenate (%d, %d) --- char %c\n", y, x, copy[y][x]);
 		copy[y][x] = 'F';
+	
 		flood_fill(data, copy, x + 1, y);
 		flood_fill(data, copy, x - 1, y);
 		flood_fill(data, copy, x, y + 1);
 		flood_fill(data, copy, x, y - 1);
 	}
 }
+
 
 static void	check_column_edges(t_data *data, char **copy, int x, int total_rows)
 {
@@ -43,11 +48,8 @@ static void	check_column_edges(t_data *data, char **copy, int x, int total_rows)
 		else
 			break;
 	}
-	if (start >= total_rows)
-        ft_end(data, "Error: Empty or invalid column in map");
-    printf("start column %d : '%c' \nin start line %d\n\n", x, copy[start][x], start);
-	if (start == total_rows)
-		return;
+	if (start > total_rows)
+		return ;
 	end = total_rows - 1;
 	while (end >= 0)
 	{
@@ -56,15 +58,11 @@ static void	check_column_edges(t_data *data, char **copy, int x, int total_rows)
 		else
 			break;
 	}
-	if (start >= end)
+	if (start > end)
         ft_end(data, "Error: Empty or invalid column in map");
-    printf("end column %d : '%c' \nin end line %d\n\n", x, copy[end][x], end);
-	if (start >= end)
-		ft_end(data, "Error: Empty or invalid column in map");
 	if (copy[start][x] != '1' || copy[end][x] != '1')
 		ft_end(data, "Error: Map not closed in columns");
 }
-
 
 void	validate_columns(t_data *data, char **copy)
 {
@@ -102,7 +100,7 @@ void	validate_rows(t_data *data, char **copy)
 		if (start > end)
 			ft_end(data, "Error: Empty line in map");
 		if (copy[y][start] != '1' || copy[y][end] != '1')
-			ft_end(data, "Error: Map out of borders (rows)");
+			ft_end(data, "Error: Map not closed in rows");
 		y++;
 	}
 }
@@ -113,5 +111,5 @@ void	validate_map(t_data *data, char **copy)
 	expand_tabs(copy);
 	validate_rows(data, copy);
 	validate_columns(data, copy);
-	flood_fill(data, copy, data->position.x, data->position.y);
+	flood_fill(data, copy, data->position.pos_x, data->position.pos_y);
 }

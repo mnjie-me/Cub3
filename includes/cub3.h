@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/08 16:34:12 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/09 17:09:08 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 
 typedef struct s_position
 {
-    double x;
-    double y;
-    double dir_x;
-    double dir_y;
+    double  pos_x;
+    double  pos_y;
+    double  dir_x;
+    double  dir_y;
+    double  plane_x;
+    double  plane_y;
 } t_position;
 
 typedef struct s_colors
@@ -72,10 +74,12 @@ int			is_map_line(char *line);
 void		free_map(char **map);
 void		free_copy(char **copy, int *j);
 void		check_character(t_data *data, char **copy);
-void		check_direction(t_data *data, char **copy, int *x, int *y);
-void		check_position(t_data *data, int *x, int *y);
+void		check_position(t_data *data, char **copy, int *x, int *y);
 int	        get_max_x(char **copy);
 void	    expand_tabs(char **copy);
 void        remove_newline(char **copy);
+
+// ENGINE
+void	raycast(t_data *data);
 
 #endif
