@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/10 18:53:35 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/10 22:44:19 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@
 # include <string.h>
 # include "libft.h"
 # include "mlx.h"
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_draw
+{
+	double	wall_height;
+	int		start;
+	int		end;
+}t_draw;
 
 typedef struct s_ray
 {
@@ -75,6 +91,8 @@ typedef struct s_data
 	t_colors	colors;
     t_pos       pos;
 	t_ray		ray;
+	t_draw		draw;
+	t_img		img;
 } t_data;
 
 // PARSER
@@ -104,11 +122,15 @@ void        remove_newline(char **copy);
 
 // ENGINE
 void	raycast(t_data *data);
+void	calculate_perp(t_data *data);
+void	draw_wall(t_data *data, int x);
+void	draw_floor_and_ceiling(t_data *data, int x);
 
 // ENGINE UTILS
 void	init_ray(t_data *data);
 void	fill_gaps(char **map);
 int		check_width(char **map, int row);
 int		check_height(char **map);
+void	img_pixel_put(t_img *img, int x, int y, int color);
 
 #endif

@@ -3,7 +3,7 @@ NAME	= cub3
 SRCS 	= srcs/cub3.c srcs/parser/parse_scene.c srcs/parser/utils_scene.c srcs/parser/utils_elements.c \
 			srcs/parser/parse_elements.c srcs/parser/parse_map.c srcs/parser/utils_map.c \
 			srcs/parser/validate_map.c srcs/parser/utils_validate.c srcs/engine/raycast.c \
-			srcs/engine/utils.c
+			srcs/engine/utils.c srcs/engine/draw_wall.c
 
 OBJS 	= ${SRCS:.c=.o}
 

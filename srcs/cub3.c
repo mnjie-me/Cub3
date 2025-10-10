@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:22:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/10 18:52:01 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/10 22:24:10 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,13 @@ int	main(int argc, char *argv[])
 		basic_error("Error, write: ./cub3 SCENE.cub");
 	init_data(&data);
     parse_scene(&data, argv);
-	raycast(&data);
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx,
-			IMG_W, IMG_H, "./cub3");
+	data.win = mlx_new_window(data.mlx, IMG_W, IMG_H, "./cub3");
+	data.img.img = mlx_new_image(data.mlx, IMG_W, IMG_H);
+	data.img.addr = mlx_get_data_addr(data.img.img,
+			&data.img.bpp, &data.img.line_len, &data.img.endian);
+	raycast(&data);
+	mlx_put_image_to_window(data.mlx, data.win, data.img.img, 0, 0);
 	//mlx_hook(data.win, 17, 0, cleanup_and_exit, &data);
 	mlx_loop(data.mlx);
 	return (0);
