@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/10 22:44:19 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/10 22:55:16 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # define IMG_W 1024
 # define IMG_H 768
+
+# ifndef M_PI
+# define M_PI 3.14159265358979323846
+# endif
 
 # include <stdlib.h>
 # include <fcntl.h>

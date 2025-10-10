@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:16:37 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/09 20:44:48 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/10 23:01:00 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ void	check_character(t_data *data, char **copy)
 
 void	check_plane(t_data *data)
 {
-	double	fov;
+	double fov_angle;
+	double fov;
 
-	fov = 0.66;
-	data->pos.plane_x = -data->pos.dir_y * fov;
-	data->pos.plane_y =  data->pos.dir_x * fov;
+	fov_angle = 66.0 * (M_PI / 180.0);
+	fov = tan(fov_angle / 2.0);
+	data->pos.plane_x = -data->pos.dir_y * tan(fov_angle / 2.0);
+	data->pos.plane_y =  data->pos.dir_x * tan(fov_angle / 2.0);
 }
 
 void	check_position(t_data *data, char **copy, int *x, int *y)
