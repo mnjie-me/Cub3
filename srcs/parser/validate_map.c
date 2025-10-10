@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:03:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/09 15:46:33 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/09 20:23:56 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	flood_fill(t_data *data, char **copy, int x, int y)
 {
-	if (y < 0 || y >= data->size_y)
+	if (y < 0 || y >= IMG_H)
 		ft_end(data, "Error: Out of border (y)");
-	if (x < 0 || x >= (int)ft_strlen(copy[y]))
+	if (x < 0 || x >= IMG_W)
 		ft_end(data, "Error: Out of border (x)");
 	if (copy[y][x] == ' ' || copy[y][x] == '\n')
 		ft_end(data, "Error: Open border (space)");
@@ -24,9 +24,7 @@ void	flood_fill(t_data *data, char **copy, int x, int y)
 		copy[y][x] == 'W' || copy[y][x] == 'E' ||
 		copy[y][x] == '0')
 	{
-		printf("cordenate (%d, %d) --- char %c\n", y, x, copy[y][x]);
 		copy[y][x] = 'F';
-	
 		flood_fill(data, copy, x + 1, y);
 		flood_fill(data, copy, x - 1, y);
 		flood_fill(data, copy, x, y + 1);
@@ -111,5 +109,5 @@ void	validate_map(t_data *data, char **copy)
 	expand_tabs(copy);
 	validate_rows(data, copy);
 	validate_columns(data, copy);
-	flood_fill(data, copy, data->position.pos_x, data->position.pos_y);
+	flood_fill(data, copy, data->pos.pos_x, data->pos.pos_y);
 }

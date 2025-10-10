@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:56:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/09 15:38:02 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/10 15:20:27 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,12 @@ char	**read_file(t_data *data, char **argv)
 
 void	parse_scene(t_data *data, char **argv)
 {
+	int i;
 	read_file(data, argv);
 	parse_config(data->map, data);
 	parse_map(data->map, data);
-	free_map(data->map);
-	data->map = NULL;
+	i = 0;
+	while (data->map[i])
+		i++;
+	data->map[i] = NULL;
 }

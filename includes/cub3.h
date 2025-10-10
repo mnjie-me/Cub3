@@ -6,19 +6,43 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/09 17:09:08 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/10 18:53:35 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3_H
-#define CUB3_H
+# define CUB3_H
+
+# define IMG_W 1024
+# define IMG_H 768
 
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
+# include <string.h>
 # include "libft.h"
 # include "mlx.h"
 
-typedef struct s_position
+typedef struct s_ray
+{
+	int		map_h;
+	int		map_w;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	perp_wall_dist;
+}t_ray;
+
+typedef struct s_pos
 {
     double  pos_x;
     double  pos_y;
@@ -26,7 +50,7 @@ typedef struct s_position
     double  dir_y;
     double  plane_x;
     double  plane_y;
-} t_position;
+} t_pos;
 
 typedef struct s_colors
 {
@@ -46,12 +70,11 @@ typedef struct s_data
 {
     void		*mlx;
     void		*win;
-    int			size_x;
-    int			size_y;
     char		**map;
     t_textures	textures;
 	t_colors	colors;
-    t_position  position;
+    t_pos       pos;
+	t_ray		ray;
 } t_data;
 
 // PARSER
@@ -81,5 +104,11 @@ void        remove_newline(char **copy);
 
 // ENGINE
 void	raycast(t_data *data);
+
+// ENGINE UTILS
+void	init_ray(t_data *data);
+void	fill_gaps(char **map);
+int		check_width(char **map, int row);
+int		check_height(char **map);
 
 #endif

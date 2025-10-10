@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:16:37 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/09 17:19:29 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/09 20:44:48 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,34 +45,34 @@ void	check_plane(t_data *data)
 	double	fov;
 
 	fov = 0.66;
-	data->position.plane_x = -data->position.dir_y * fov;
-	data->position.plane_y =  data->position.dir_x * fov;
+	data->pos.plane_x = -data->pos.dir_y * fov;
+	data->pos.plane_y =  data->pos.dir_x * fov;
 }
 
 void	check_position(t_data *data, char **copy, int *x, int *y)
 {
 	if (copy[*y][*x] == 'N')
 	{
-		data->position.dir_x = 1;
-		data->position.dir_y = 0;
+		data->pos.dir_x = 0;
+		data->pos.dir_y = -1;
 	}
 	else if (copy[*y][*x] == 'S')
 	{
-		data->position.dir_x = -1;
-		data->position.dir_y = 0;	
+		data->pos.dir_x = 0;
+		data->pos.dir_y = 1;	
 	}
 	else if (copy[*y][*x] == 'W')
 	{
-		data->position.dir_x = 0;
-		data->position.dir_y = -1;	
+		data->pos.dir_x = -1;
+		data->pos.dir_y = 0;	
 	}
 	else if (copy[*y][*x] == 'E')
 	{
-		data->position.dir_x = 0;
-		data->position.dir_y = 1;
+		data->pos.dir_x = 1;
+		data->pos.dir_y = 0;
 	}
-	data->position.pos_x = (double)(*x) + 0.5;
-	data->position.pos_y = (double)(*y) + 0.5;
+	data->pos.pos_x = (double)(*x) + 0.5;
+	data->pos.pos_y = (double)(*y) + 0.5;
 	check_plane(data);
 	copy[*y][*x] = '0';
 }
