@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 15:17:06 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/09 15:50:06 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/14 11:43:06 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void check_elements(t_data *data)
 {
     char *msg = NULL;
 
-    if (!data->textures.no)
+    if (!data->tex.no)
 		append_error(&msg, "Error: Missing texture: NO");
-    if (!data->textures.so)
+    if (!data->tex.so)
 		append_error(&msg, "Error: Missing texture: SO");
-    if (!data->textures.we)
+    if (!data->tex.we)
 		append_error(&msg, "Error: Missing texture: WE");
-    if (!data->textures.ea)
+    if (!data->tex.ea)
 		append_error(&msg, "Error: Missing texture: EA");
     if (data->colors.floor == -1)
 		append_error(&msg, "Error: Missing floor color");
@@ -88,24 +88,22 @@ void	parse_textures(t_data *data, char *line, int *j)
 
 	id = line[*j];
 	*j += 1;
-	if (line[*j + 1] == ' ' &&
-		((id == 'N' && line[*j] == 'O') ||
-        (id == 'S' && line[*j] == 'O') ||
-        (id == 'W' && line[*j] == 'E') ||
-        (id == 'E' && line[*j] == 'A')))
+	if (line[*j + 1] == ' ' && ((id == 'N' && line[*j] == 'O')
+			|| (id == 'S' && line[*j] == 'O') || (id == 'W'
+				&& line[*j] == 'E') || (id == 'E' && line[*j] == 'A')))
 	{
 		(*j)++;
 		skip_spaces(line, j);
 		if (!line[*j])
 			ft_end(data, "Error: Missing texture path");
 		if (id == 'N')
-			data->textures.no = ft_strdup(line + *j);
+			data->tex.no = ft_strdup_trim(line + *j);
 		else if (id == 'S')
-			data->textures.so = ft_strdup(line + *j);
+			data->tex.so = ft_strdup_trim(line + *j);
 		else if (id == 'W')
-			data->textures.we = ft_strdup(line + *j);
+			data->tex.we = ft_strdup_trim(line + *j);
 		else if (id == 'E')
-			data->textures.ea = ft_strdup(line + *j);	
+			data->tex.ea = ft_strdup_trim(line + *j);	
 	}
 	else
 		ft_end(data, "Error: Invalid texture identifier");

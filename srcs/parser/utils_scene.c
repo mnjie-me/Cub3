@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:22:53 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/06 16:46:43 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/14 11:43:28 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	free_map(char **map)
 
 void	ft_destroy_img(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->textures.no);
-	mlx_destroy_image(data->mlx, data->textures.so);
-	mlx_destroy_image(data->mlx, data->textures.we);
-	mlx_destroy_image(data->mlx, data->textures.ea);
+	mlx_destroy_image(data->mlx, data->tex.no);
+	mlx_destroy_image(data->mlx, data->tex.so);
+	mlx_destroy_image(data->mlx, data->tex.we);
+	mlx_destroy_image(data->mlx, data->tex.ea);
 }
 
 int ft_end(t_data *data, char *msg)

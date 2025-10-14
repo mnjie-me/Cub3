@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/10 22:55:16 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/14 12:42:40 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_draw
@@ -60,6 +62,7 @@ typedef struct s_ray
 	double	side_dist_x;
 	double	side_dist_y;
 	double	perp_wall_dist;
+	double	wall_x;
 }t_ray;
 
 typedef struct s_pos
@@ -78,25 +81,26 @@ typedef struct s_colors
     int ceil; 
 }t_colors;
 
-typedef struct s_textures
+typedef struct s_tex
 {
     char *no;
     char *so;
     char *we;
     char *ea;
-}t_textures;
+}t_tex;
 
 typedef struct s_data
 {
     void		*mlx;
     void		*win;
     char		**map;
-    t_textures	textures;
+    t_tex		tex;
 	t_colors	colors;
     t_pos       pos;
 	t_ray		ray;
 	t_draw		draw;
 	t_img		img;
+	t_img		t[4];
 } t_data;
 
 // PARSER
@@ -123,12 +127,14 @@ void		check_position(t_data *data, char **copy, int *x, int *y);
 int	        get_max_x(char **copy);
 void	    expand_tabs(char **copy);
 void        remove_newline(char **copy);
+char 		*ft_strdup_trim(const char *s);
 
 // ENGINE
 void	raycast(t_data *data);
 void	calculate_perp(t_data *data);
 void	draw_wall(t_data *data, int x);
-void	draw_floor_and_ceiling(t_data *data, int x);
+void 	load_textures(t_data *data);
+void	draw_wall_column(t_data *data, int x);
 
 // ENGINE UTILS
 void	init_ray(t_data *data);

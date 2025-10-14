@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 17:05:16 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/10 22:42:55 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/14 13:50:17 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ int	check_hit(t_data *data)
 
 void	dda(t_data *data)
 {
-	int	hit;
+	int	hit = 0;
 
-	hit = 0;
 	while (!hit)
 	{
 		if (data->ray.side_dist_x < data->ray.side_dist_y)
@@ -52,7 +51,7 @@ void	dda(t_data *data)
 	}
 }
 
-void	step_dist(t_data *data)
+void step_dist(t_data *data)
 {
 	if (data->ray.ray_dir_x < 0)
 	{
@@ -66,7 +65,6 @@ void	step_dist(t_data *data)
 		data->ray.side_dist_x = (data->ray.map_x + 1.0 - data->pos.pos_x)
 			* data->ray.delta_dist_x;
 	}
-
 	if (data->ray.ray_dir_y < 0)
 	{
 		data->ray.step_y = -1;
@@ -81,43 +79,37 @@ void	step_dist(t_data *data)
 	}
 }
 
-
-void	prep_ray(t_data *data, int x)
+void prep_ray(t_data *data, int x)
 {
-	data->ray.camera_x = (2.0 * x / IMG_W) - 1.0;
+	data->ray.camera_x = 2.0 * x / (double)IMG_W - 1.0;
 	data->ray.ray_dir_x = data->pos.dir_x + data->pos.plane_x * data->ray.camera_x;
 	data->ray.ray_dir_y = data->pos.dir_y + data->pos.plane_y * data->ray.camera_x;
-
-	if (data->ray.ray_dir_x == 0)
-		data->ray.delta_dist_x = 1e30;
-	else
-		data->ray.delta_dist_x = fabs(1.0 / data->ray.ray_dir_x);
-
-	if (data->ray.ray_dir_y == 0)
-		data->ray.delta_dist_y = 1e30;
-	else
-		data->ray.delta_dist_y = fabs(1.0 / data->ray.ray_dir_y);
+	if (data->ray.ray_dir_x == 0.0)
+		data->ray.ray_dir_x = 1e-30;
+	if (data->ray.ray_dir_y == 0.0)
+		data->ray.ray_dir_y = 1e-30;
+	data->ray.map_x = (int)data->pos.pos_x;
+	data->ray.map_y = (int)data->pos.pos_y;
 }
+
 
 void	raycast(t_data *data)
 {
-	int	x;
-	
-	x = 0;
+	int	x = 0;
+
 	fill_gaps(data->map);
-	data->ray.map_x = (int)data->pos.pos_x;
-	data->ray.map_y = (int)data->pos.pos_y;
-	printf("\n");
 	data->ray.map_w = check_width(data->map, data->ray.map_y);
 	data->ray.map_h = check_height(data->map);
+
 	while (x < IMG_W)
 	{
 		prep_ray(data, x);
+		data->ray.delta_dist_x = fabs(1.0 / data->ray.ray_dir_x);
+		data->ray.delta_dist_y = fabs(1.0 / data->ray.ray_dir_y);
 		step_dist(data);
 		dda(data);
 		calculate_perp(data);
-		draw_wall(data, x);
-		draw_floor_and_ceiling(data, x);
+		draw_wall_column(data, x);
 		x++;
 	}
 }

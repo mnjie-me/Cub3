@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 15:06:26 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/06 15:46:22 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/14 11:07:47 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,32 @@ void	append_error(char **msg, char *new_msg)
     }
     else
         *msg = ft_strdup(new_msg);
+}
+
+char *ft_strdup_trim(const char *s)
+{
+    size_t start;
+    size_t end;
+    char *dup;
+    size_t len;
+
+	start = 0;
+    if (!s)
+        return NULL;
+    while (s[start] && (s[start] == ' ' || s[start] == '\t'))
+        start++;
+    end = start;
+    while (s[end] && s[end] != '\n')
+        end++;
+    while (end > start && (s[end - 1] == ' ' || s[end - 1] == '\t'))
+        end--;
+    len = end - start;
+    dup = malloc(len + 1);
+    if (!dup)
+        return NULL;
+    memcpy(dup, s + start, len);
+    dup[len] = '\0';
+    return (dup);
 }
 
 char	skip_spaces(char *map, int *j)
