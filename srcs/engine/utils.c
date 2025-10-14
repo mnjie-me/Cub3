@@ -6,11 +6,18 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 18:45:50 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/10 18:46:27 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/14 14:12:03 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
+
+void	init_draw(t_data *data)
+{
+	data->draw.wall_height = 0;
+	data->draw.start = 0;
+	data->draw.end = 0;
+}
 
 int	check_height(char **map)
 {
@@ -33,25 +40,6 @@ int	check_width(char **map, int row)
 		i++;
 	i -= 1;
 	return (i);
-}
-
-void	fill_gaps(char **map)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == ' ')
-				map[y][x] = '1';
-			x++;
-		}
-		y++;
-	}
 }
 
 void	init_ray(t_data *data)
