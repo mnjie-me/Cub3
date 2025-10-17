@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 15:17:06 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/14 11:43:06 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/17 13:57:14 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	parse_textures(t_data *data, char *line, int *j)
 	*j += 1;
 	if (line[*j + 1] == ' ' && ((id == 'N' && line[*j] == 'O')
 			|| (id == 'S' && line[*j] == 'O') || (id == 'W'
-				&& line[*j] == 'E') || (id == 'E' && line[*j] == 'A')))
+			&& line[*j] == 'E') || (id == 'E' && line[*j] == 'A')))
 	{
 		(*j)++;
 		skip_spaces(line, j);
@@ -111,9 +111,30 @@ void	parse_textures(t_data *data, char *line, int *j)
 
 void	check_identifier(t_data *data, char **map, int *i, int *j)
 {
-	if (map[*i][*j] == 'N' || map[*i][*j] == 'S' ||
-		map[*i][*j] == 'W' || map[*i][*j] == 'E')
-		parse_textures(data, map[*i], j);
-	else if (map[*i][*j] == 'F' || map[*i][*j] == 'C')
+	static int	flags[6];
+	int			id;
+
+	id = -1;
+	if (map[*i][*j] == 'N' && map[*i][*j + 1] == 'O')
+		id = 0;
+	else if (map[*i][*j] == 'S' && map[*i][*j + 1] == 'O')
+		id = 1;
+	else if (map[*i][*j] == 'W' && map[*i][*j + 1] == 'E')
+		id = 2;
+	else if (map[*i][*j] == 'E' && map[*i][*j + 1] == 'A')
+		id = 3;
+	else if (map[*i][*j] == 'F')
+		id = 4;
+	else if (map[*i][*j] == 'C')
+		id = 5;
+	else
+		ft_end(data, "Error : Wrong identifier");
+	if (flags[id] == 1)
+		ft_end(data, "Error : Duplicate identifier");
+	flags[id] = 1;
+	if (id == 4 || id == 5)
 		parse_rgb(data, map[*i], j);
+	else
+		parse_textures(data, map[*i], j);
 }
+

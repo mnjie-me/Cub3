@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/14 12:42:40 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/17 14:48:01 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # define IMG_W 1024
 # define IMG_H 768
+# define W_KEY 119
+# define A_KEY 97
+# define S_KEY 115
+# define D_KEY 100
+# define ESC_KEY 65307
 
 # ifndef M_PI
 # define M_PI 3.14159265358979323846
@@ -24,8 +29,17 @@
 # include <fcntl.h>
 # include <math.h>
 # include <string.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 # include "libft.h"
 # include "mlx.h"
+
+typedef struct s_keys {
+    int w;
+    int a;
+    int s;
+    int d;
+} t_keys;
 
 typedef struct s_img
 {
@@ -101,6 +115,7 @@ typedef struct s_data
 	t_draw		draw;
 	t_img		img;
 	t_img		t[4];
+	t_keys		keys;
 } t_data;
 
 // PARSER
@@ -128,13 +143,17 @@ int	        get_max_x(char **copy);
 void	    expand_tabs(char **copy);
 void        remove_newline(char **copy);
 char 		*ft_strdup_trim(const char *s);
+void		check_all_texture_paths(t_data *data);
 
 // ENGINE
 void	raycast(t_data *data);
 void	calculate_perp(t_data *data);
 void	draw_wall(t_data *data, int x);
-void 	load_textures(t_data *data);
+void 	load_ver_textures(t_data *data);
 void	draw_wall_column(t_data *data, int x);
+void	ceil_floor_colors(t_data *data, int x);
+void 	move_player(t_data *data, int key, double move_speed);
+void	rotate_player(t_data *data, double rot_speed);
 
 // ENGINE UTILS
 void	init_ray(t_data *data);
@@ -142,5 +161,6 @@ void	fill_gaps(char **map);
 int		check_width(char **map, int row);
 int		check_height(char **map);
 void	img_pixel_put(t_img *img, int x, int y, int color);
+void	ft_mlx_pixel_put(t_img *img, int x, int y, unsigned int color);
 
 #endif

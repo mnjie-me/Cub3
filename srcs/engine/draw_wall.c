@@ -6,13 +6,13 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 19:05:57 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/14 14:08:48 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/14 18:40:14 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, unsigned int color)
+void	ft_mlx_pixel_put(t_img *img, int x, int y, unsigned int color)
 {
 	char	*dst;
 
@@ -66,7 +66,7 @@ void draw_wall_pixels(t_data *data, t_img *tex, int x)
         unsigned int color = get_tex_color(tex, tex_x, tex_y);
         if (data->ray.side == 1)
             color = (color >> 1) & 0x7F7F7F;
-        my_mlx_pixel_put(&data->img, x, y, color);
+        ft_mlx_pixel_put(&data->img, x, y, color);
         y++;
     }
 }

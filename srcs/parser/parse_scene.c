@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:56:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/10 15:20:27 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/17 14:04:08 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	parse_map(char **map, t_data *data)
 	}
 	if (!map[i])
 		ft_end(data, "Error: Invalid map");
-	check_map(data, map, &i);	
+	check_map(data, map, &i);
+	
 }
 
 void	parse_config(char **map, t_data *data)
@@ -59,6 +60,7 @@ void	parse_config(char **map, t_data *data)
 		}
 		i++;
 	}
+	check_all_texture_paths(data);
 }
 
 char	**read_file(t_data *data, char **argv)
@@ -92,12 +94,8 @@ char	**read_file(t_data *data, char **argv)
 
 void	parse_scene(t_data *data, char **argv)
 {
-	int i;
 	read_file(data, argv);
 	parse_config(data->map, data);
 	parse_map(data->map, data);
-	i = 0;
-	while (data->map[i])
-		i++;
-	data->map[i] = NULL;
+	data->map[(int)data->pos.pos_y][(int)data->pos.pos_x] = '0';
 }

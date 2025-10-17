@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 17:05:16 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/14 14:12:35 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/14 18:43:19 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	raycast(t_data *data)
 		dda(data);
 		calculate_perp(data);
 		draw_wall_column(data, x);
+		ceil_floor_colors(data, x);
 		x++;
 	}
 }
