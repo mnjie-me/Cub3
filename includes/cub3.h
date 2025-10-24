@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/17 14:48:01 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 13:01:52 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,13 +154,12 @@ void	draw_wall_column(t_data *data, int x);
 void	ceil_floor_colors(t_data *data, int x);
 void 	move_player(t_data *data, int key, double move_speed);
 void	rotate_player(t_data *data, double rot_speed);
-
+unsigned int	get_tex_color(t_img *tex, int tx, int ty);
 // ENGINE UTILS
-void	init_ray(t_data *data);
-void	fill_gaps(char **map);
-int		check_width(char **map, int row);
-int		check_height(char **map);
-void	img_pixel_put(t_img *img, int x, int y, int color);
-void	ft_mlx_pixel_put(t_img *img, int x, int y, unsigned int color);
+void		init_ray(t_data *data);
+int			check_width(char **map, int row);
+int			check_height(char **map);
+void		ft_mlx_pixel_put(t_img *img, int x, int y, unsigned int color);
+unsigned int color_and_shade(t_data *data, t_img *tex, int tex_x, int tex_y);
 
 #endif

@@ -6,11 +6,31 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 18:45:50 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/14 14:12:03 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 12:57:55 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
+
+unsigned int color_and_shade(t_data *data, t_img *tex, int tex_x, int tex_y)
+{
+    unsigned int color;
+	
+    if (!tex || !tex->addr)
+        return (0);
+    if (tex_x < 0)
+        tex_x = 0;
+    if (tex_y < 0)
+        tex_y = 0;
+    if (tex_x >= tex->width)
+        tex_x = tex->width - 1;
+    if (tex_y >= tex->height)
+        tex_y = tex->height - 1;
+    color = get_tex_color(tex, tex_x, tex_y);
+    if (data->ray.side == 1)
+        color = (color >> 1) & 0x7F7F7F;
+    return (color);
+}
 
 void	init_draw(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 19:05:57 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 12:44:25 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 13:01:34 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_mlx_pixel_put(t_img *img, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-static unsigned int	get_tex_color(t_img *tex, int tx, int ty)
+unsigned int	get_tex_color(t_img *tex, int tx, int ty)
 {
 	char	*dst;
 
@@ -42,11 +42,11 @@ static unsigned int	get_tex_color(t_img *tex, int tx, int ty)
 
 void draw_wall_pixels(t_data *data, t_img *tex, int x)
 {
-    int y;
-    int tex_x;
-    int tex_y;
-    double step;
-    double tex_pos;
+    int     y;
+    int     tex_x;
+    int     tex_y;
+    double  step;
+    double  tex_pos;
 
     if (data->ray.side == 0)
         tex_x = (int)(data->ray.wall_x * (double)(tex->width - 1));
@@ -58,15 +58,9 @@ void draw_wall_pixels(t_data *data, t_img *tex, int x)
     while (y < data->draw.end)
     {
         tex_y = (int)tex_pos;
-        if (tex_y >= tex->height)
-            tex_y = tex->height - 1;
-        if (tex_y < 0)
-            tex_y = 0;
         tex_pos += step;
-        unsigned int color = get_tex_color(tex, tex_x, tex_y);
-        if (data->ray.side == 1)
-            color = (color >> 1) & 0x7F7F7F;
-        ft_mlx_pixel_put(&data->img, x, y, color);
+        ft_mlx_pixel_put(&data->img, x, y,
+            color_and_shade(data, tex, tex_x, tex_y));
         y++;
     }
 }
@@ -91,11 +85,6 @@ void draw_wall_column(t_data *data, int x)
     }
     if (!tex || !tex->img)
         return;
-    if (data->ray.side == 0)
-        data->ray.wall_x = data->pos.pos_y + data->ray.perp_wall_dist * data->ray.ray_dir_y;
-    else
-        data->ray.wall_x = data->pos.pos_x + data->ray.perp_wall_dist * data->ray.ray_dir_x;
-    data->ray.wall_x -= floor(data->ray.wall_x);
     draw_wall_pixels(data, tex, x);
 }
 
