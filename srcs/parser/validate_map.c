@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:03:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/09 20:23:56 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 16:06:36 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	flood_fill(t_data *data, char **copy, int x, int y)
 		ft_end(data, "Error: Out of border (x)");
 	if (copy[y][x] == ' ' || copy[y][x] == '\n')
 		ft_end(data, "Error: Open border (space)");
-	if (copy[y][x] == 'N'|| copy[y][x] == 'S' ||
+	if (copy[y][x] == 'N' || copy[y][x] == 'S' ||
 		copy[y][x] == 'W' || copy[y][x] == 'E' ||
 		copy[y][x] == '0')
 	{
@@ -31,7 +31,6 @@ void	flood_fill(t_data *data, char **copy, int x, int y)
 		flood_fill(data, copy, x, y - 1);
 	}
 }
-
 
 static void	check_column_edges(t_data *data, char **copy, int x, int total_rows)
 {
@@ -44,7 +43,7 @@ static void	check_column_edges(t_data *data, char **copy, int x, int total_rows)
 		if (x >= (int)ft_strlen(copy[start]) || copy[start][x] == ' ')
 			start++;
 		else
-			break;
+			break ;
 	}
 	if (start > total_rows)
 		return ;
@@ -54,10 +53,10 @@ static void	check_column_edges(t_data *data, char **copy, int x, int total_rows)
 		if (x >= (int)ft_strlen(copy[end]) || copy[end][x] == ' ')
 			end--;
 		else
-			break;
+			break ;
 	}
 	if (start > end)
-        ft_end(data, "Error: Empty or invalid column in map");
+		ft_end(data, "Error: Empty or invalid column in map");
 	if (copy[start][x] != '1' || copy[end][x] != '1')
 		ft_end(data, "Error: Map not closed in columns");
 }
@@ -90,10 +89,12 @@ void	validate_rows(t_data *data, char **copy)
 	while (copy[y])
 	{
 		start = 0;
-		while (copy[y][start] && (copy[y][start] == ' ' || copy[y][start] == '\t'))
+		while (copy[y][start] && (copy[y][start] == ' '
+			|| copy[y][start] == '\t'))
 			start++;
 		end = (int)ft_strlen(copy[y]) - 1;
-		while (end >= 0 && (copy[y][end] == ' ' || copy[y][end] == '\t' || copy[y][end] == '\n'))
+		while (end >= 0 && (copy[y][end] == ' '
+			|| copy[y][end] == '\t' || copy[y][end] == '\n'))
 			end--;
 		if (start > end)
 			ft_end(data, "Error: Empty line in map");

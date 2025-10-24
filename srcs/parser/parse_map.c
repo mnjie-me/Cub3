@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 12:49:36 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/14 17:38:04 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 16:21:11 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**extract_map(char **text, int start)
 		if (!copy[j])
 		{
 			free_copy(copy, &j);
-			return (NULL);	
+			return (NULL);
 		}
 		j++;
 		start++;
@@ -60,7 +60,6 @@ char	**extract_map(char **text, int start)
 	copy[j] = NULL;
 	return (copy);
 }
-
 
 void	check_map(t_data *data, char **map, int *i)
 {

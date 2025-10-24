@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 15:06:26 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/14 11:07:47 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 16:14:47 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,42 +29,42 @@ void	free_split(char **rgb)
 
 void	append_error(char **msg, char *new_msg)
 {
-    char *tmp;
+	char	*tmp;
 
-    if (*msg)
-    {
-        tmp = *msg;
-        *msg = ft_strjoin(*msg, new_msg);
-        free(tmp);
-    }
-    else
-        *msg = ft_strdup(new_msg);
+	if (*msg)
+	{
+		tmp = *msg;
+		*msg = ft_strjoin(*msg, new_msg);
+		free(tmp);
+	}
+	else
+		*msg = ft_strdup(new_msg);
 }
 
-char *ft_strdup_trim(const char *s)
+char	*ft_strdup_trim(const char *s)
 {
-    size_t start;
-    size_t end;
-    char *dup;
-    size_t len;
+	size_t	start;
+	size_t	end;
+	char	*dup;
+	size_t	len;
 
 	start = 0;
-    if (!s)
-        return NULL;
-    while (s[start] && (s[start] == ' ' || s[start] == '\t'))
-        start++;
-    end = start;
-    while (s[end] && s[end] != '\n')
-        end++;
-    while (end > start && (s[end - 1] == ' ' || s[end - 1] == '\t'))
-        end--;
-    len = end - start;
-    dup = malloc(len + 1);
-    if (!dup)
-        return NULL;
-    memcpy(dup, s + start, len);
-    dup[len] = '\0';
-    return (dup);
+	if (!s)
+		return (NULL);
+	while (s[start] && (s[start] == ' ' || s[start] == '\t'))
+		start++;
+	end = start;
+	while (s[end] && s[end] != '\n')
+		end++;
+	while (end > start && (s[end - 1] == ' ' || s[end - 1] == '\t'))
+		end--;
+	len = end - start;
+	dup = malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	memcpy(dup, s + start, len);
+	dup[len] = '\0';
+	return (dup);
 }
 
 char	skip_spaces(char *map, int *j)

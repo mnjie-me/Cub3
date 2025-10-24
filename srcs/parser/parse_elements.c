@@ -3,33 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 15:17:06 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/17 13:57:14 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 16:23:24 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
 
-void check_elements(t_data *data)
+void	check_elements(t_data *data)
 {
-    char *msg = NULL;
+	char	*msg;
 
-    if (!data->tex.no)
+	msg = NULL;
+	if (!data->tex.no)
 		append_error(&msg, "Error: Missing texture: NO");
-    if (!data->tex.so)
+	if (!data->tex.so)
 		append_error(&msg, "Error: Missing texture: SO");
-    if (!data->tex.we)
+	if (!data->tex.we)
 		append_error(&msg, "Error: Missing texture: WE");
-    if (!data->tex.ea)
+	if (!data->tex.ea)
 		append_error(&msg, "Error: Missing texture: EA");
-    if (data->colors.floor == -1)
+	if (data->colors.floor == -1)
 		append_error(&msg, "Error: Missing floor color");
-    if (data->colors.ceil == -1)
+	if (data->colors.ceil == -1)
 		append_error(&msg, "Error: Missing ceiling color");
-    if (msg)
-        ft_end(data, msg);
+	if (msg)
+		ft_end(data, msg);
 }
 
 int	check_value(char *num)
@@ -60,7 +61,7 @@ void	parse_rgb(t_data *data, char *line, int *j)
 	int		r;
 	int		g;
 	int		b;
-	
+
 	id = line[*j];
 	if (line[*j + 1] == ' ')
 	{
@@ -90,7 +91,7 @@ void	parse_textures(t_data *data, char *line, int *j)
 	*j += 1;
 	if (line[*j + 1] == ' ' && ((id == 'N' && line[*j] == 'O')
 			|| (id == 'S' && line[*j] == 'O') || (id == 'W'
-			&& line[*j] == 'E') || (id == 'E' && line[*j] == 'A')))
+				&& line[*j] == 'E') || (id == 'E' && line[*j] == 'A')))
 	{
 		(*j)++;
 		skip_spaces(line, j);
@@ -103,7 +104,7 @@ void	parse_textures(t_data *data, char *line, int *j)
 		else if (id == 'W')
 			data->tex.we = ft_strdup_trim(line + *j);
 		else if (id == 'E')
-			data->tex.ea = ft_strdup_trim(line + *j);	
+			data->tex.ea = ft_strdup_trim(line + *j);
 	}
 	else
 		ft_end(data, "Error: Invalid texture identifier");
@@ -137,4 +138,3 @@ void	check_identifier(t_data *data, char **map, int *i, int *j)
 	else
 		parse_textures(data, map[*i], j);
 }
-

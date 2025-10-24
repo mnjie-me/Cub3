@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_validate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 15:55:00 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/08 19:28:53 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 16:08:00 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,26 @@ int	get_max_x(char **copy)
 		len = (int)ft_strlen(copy[y]);
 		if (len > 0 && (copy[y][len - 1] == '\n'))
 			len--;
-		if ( len > max)
+		if (len > max)
 			max = len;
 		y++;
 	}
 	return (max);
 }
 
-void remove_newline(char **copy)
+void	remove_newline(char **copy)
 {
-    int y = 0;
-    int len;
+	int	y;
+	int	len;
 
-    while (copy[y])
-    {
-        len = (int)ft_strlen(copy[y]);
-        if (len > 0 && copy[y][len - 1] == '\n')
-            copy[y][len - 1] = '\0';
-        y++;
-    }
+	y = 0;
+	while (copy[y])
+	{
+		len = (int)ft_strlen(copy[y]);
+		if (len > 0 && copy[y][len - 1] == '\n')
+			copy[y][len - 1] = '\0';
+		y++;
+	}
 }
 
 char	*add_chars(char *copy, int len)
@@ -94,7 +95,7 @@ void	expand_tabs(char **copy)
 				len += 1;
 			x++;
 		}
-		new_line = add_chars(copy[y], len);	
+		new_line = add_chars(copy[y], len);
 		free(copy[y]);
 		copy[y] = new_line;
 		y++;

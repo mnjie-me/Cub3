@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:56:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/17 14:04:08 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 17:32:57 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	parse_map(char **map, t_data *data)
 	if (!map[i])
 		ft_end(data, "Error: Invalid map");
 	check_map(data, map, &i);
-	
 }
 
 void	parse_config(char **map, t_data *data)
@@ -47,7 +46,7 @@ void	parse_config(char **map, t_data *data)
 		if (is_empty_line(map[i]))
 		{
 			i++;
-			continue;	
+			continue ;
 		}
 		j = 0;
 		skip_spaces(map[i], &j);
@@ -56,7 +55,7 @@ void	parse_config(char **map, t_data *data)
 		else
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		i++;
 	}
@@ -66,28 +65,26 @@ void	parse_config(char **map, t_data *data)
 char	**read_file(t_data *data, char **argv)
 {
 	char	*line;
-	char 	**temp;
 	int		fd;
-	int		i;
+	int		count;
 
-	i = 0;
+	count = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_end(data, "Error: File could not be opened");
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		temp = ft_realloc(data->map, sizeof(char *) * i, sizeof(char *) * (i + 1));
-		if (!temp)
+		data->map = ft_realloc(data->map,
+				sizeof(char *) * count, sizeof(char *) * (count + 1));
+		if (!data->map)
 			ft_end(data, "Error: Malloc failed");
-		data->map = temp;
-		data->map[i] = line;
-		i++;
+		data->map[count++] = line;
 	}
-	temp = ft_realloc(data->map, sizeof(char *) * i, sizeof(char *) * (i + 1));
-	if (!temp)
+	data->map = ft_realloc(data->map,
+			sizeof(char *) * count, sizeof(char *) * (count + 1));
+	if (!data->map)
 		ft_end(data, "Error: Malloc failed");
-	data->map = temp;
-	data->map[i] = NULL;
+	data->map[count] = NULL;
 	close(fd);
 	return (data->map);
 }

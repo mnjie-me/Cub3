@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:22:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/17 14:47:15 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 17:28:37 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,9 @@ int	main(int argc, char *argv[])
     t_data  data;
     
 	if (argc != 2 || ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))
-		!= (argv[1] + ft_strlen(argv[1]) - 4))
-		basic_error("Error, write: ./cub3 SCENE.cub");
-	init_data(&data);
+    != (argv[1] + ft_strlen(argv[1]) - 4))
+        basic_error("Error, write: ./cub3 SCENE.cub");
+    init_data(&data);
     parse_scene(&data, argv);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, IMG_W, IMG_H, "./cub3");
