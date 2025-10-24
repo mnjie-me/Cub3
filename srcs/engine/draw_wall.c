@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 19:05:57 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/14 18:40:14 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/10/24 12:44:25 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,16 @@ void draw_wall_column(t_data *data, int x)
     if (data->ray.side == 0)
     {
         if (data->ray.ray_dir_x > 0)
-            tex = &data->t[3]; // Este es E
+            tex = &data->t[3];
         else
-            tex = &data->t[2]; // Este es W
+            tex = &data->t[2];
     }
     else
     {
         if (data->ray.ray_dir_y > 0)
-            tex = &data->t[1]; // Este es S
+            tex = &data->t[1];
         else
-            tex = &data->t[0]; // Este es N
+            tex = &data->t[0];
     }
     if (!tex || !tex->img)
         return;
