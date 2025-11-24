@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 17:20:50 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/11/09 01:09:46 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 
 # define IMG_W 1024
 # define IMG_H 768
-# define W_KEY 119
-# define A_KEY 97
-# define S_KEY 115
-# define D_KEY 100
-# define ESC_KEY 65307
 
 # ifndef M_PI
 # define M_PI 3.14159265358979323846
@@ -29,10 +24,26 @@
 # include <fcntl.h>
 # include <math.h>
 # include <string.h>
-# include <X11/keysym.h>
-# include <X11/X.h>
 # include "libft.h"
 # include "mlx.h"
+
+# ifdef __APPLE__
+#  define IS_MAC
+#  define W_KEY    13
+#  define A_KEY    0
+#  define S_KEY    1
+#  define D_KEY    2
+#  define ESC_KEY  53
+# else
+#  include <X11/keysym.h>
+#  include <X11/X.h>
+#  define IS_LINUX
+#  define W_KEY    119
+#  define A_KEY    97
+#  define S_KEY    115
+#  define D_KEY    100
+#  define ESC_KEY  65307
+# endif
 
 typedef struct s_keys {
     int w;
@@ -128,7 +139,6 @@ void	check_map(t_data *data, char **map, int *i);
 void	validate_map(t_data *data, char **copy);
 
 // PARSER UTILS
-void		ft_destroy_img(t_data *data);
 int			ft_end(t_data *data, char *str);
 char		skip_spaces(char *map, int *j);
 int			is_empty_line(char *line);

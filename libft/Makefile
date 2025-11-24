@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+         #
+#    By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/02 01:28:06 by crazyd            #+#    #+#              #
-#    Updated: 2025/10/06 17:04:51 by mari-cruz        ###   ########.fr        #
+#    Updated: 2025/11/05 03:25:40 by anruiz-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,12 +76,12 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+	@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 RM = rm -f
 
 $(NAME): $(OBJS)
-	ar -rcs $(NAME) $(OBJS)
+	@ar -rcs $(NAME) $(OBJS)
 
 all: $(NAME)
 

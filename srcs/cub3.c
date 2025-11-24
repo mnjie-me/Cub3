@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:22:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 17:28:37 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/11/09 00:57:06 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int key_press(int keycode, t_data *data)
         data->keys.s = 1;
     else if (keycode == D_KEY)
         data->keys.d = 1;
-    else if (keycode == XK_Escape)
+    else if (keycode == ESC_KEY)
         close_window(data);
     return (0);
 }

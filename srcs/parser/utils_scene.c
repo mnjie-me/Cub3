@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:22:53 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 16:08:56 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/11/09 01:39:01 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,58 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	ft_destroy_img(t_data *data)
+static void destroy_images(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->tex.no);
-	mlx_destroy_image(data->mlx, data->tex.so);
-	mlx_destroy_image(data->mlx, data->tex.we);
-	mlx_destroy_image(data->mlx, data->tex.ea);
+    int i;
+
+    if (!data || !data->mlx)
+        return;
+    i = 0;
+    while (i < 4)
+    {
+        if (data->t[i].img)
+        {
+            mlx_destroy_image(data->mlx, data->t[i].img);
+            data->t[i].img = NULL;
+        }
+        i++;
+    }
+    if (data->img.img)
+    {
+        mlx_destroy_image(data->mlx, data->img.img);
+        data->img.img = NULL;
+    }
 }
 
-int	ft_end(t_data *data, char *msg)
+static void mlx_cleanup(t_data *data)
 {
-	if (data->mlx)
-		ft_destroy_img(data);
-	if (data->map)
-		free_map(data->map);
-	if (data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-	}
-	if (msg)
-		ft_printf("%s\n", msg);
-	exit(EXIT_FAILURE);
+    if (!data)
+        return;
+    if (data->mlx && data->win)
+    {
+        mlx_destroy_window(data->mlx, data->win);
+        data->win = NULL;
+    }
+	#ifdef IS_MAC
+		(void)data;
+	#else
+		if (data->mlx)
+			mlx_destroy_display(data->mlx);
+		if (data->mlx)
+			free(data->mlx);
+		data->mlx = NULL;
+	#endif
+}
+
+int     ft_end(t_data *data, char *msg)
+{
+    if (data && data->mlx)
+        destroy_images(data);
+    if (data && data->map)
+        free_map(data->map);
+    if (data && data->mlx)
+        mlx_cleanup(data);
+    if (msg)
+        ft_printf("%s\n", msg);
+    exit(EXIT_FAILURE);
 }
