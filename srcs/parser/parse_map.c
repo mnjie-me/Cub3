@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 12:49:36 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 16:21:11 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:32:07 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
+
+void	check_textures_before_map(t_data *data, char **copy)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	while (copy[i])
+	{
+		if (ft_strncmp(copy[i], "NO ", 3) == 0
+			|| ft_strncmp(copy[i], "SO ", 3) == 0
+			|| ft_strncmp(copy[i], "WE ", 3) == 0
+			|| ft_strncmp(copy[i], "EA ", 3) == 0
+			|| ft_strncmp(copy[i], "F ", 2) == 0
+			|| ft_strncmp(copy[i], "C ", 2) == 0)
+			n++;
+		i++;
+	}
+	if (n != 6)
+		ft_end(data, "Error : missing textures before map");
+}
+
 
 void	place_character(t_data *data, char **copy)
 {
@@ -68,6 +91,7 @@ void	check_map(t_data *data, char **map, int *i)
 	copy = extract_map(map, *i);
 	if (!copy)
 		ft_end(data, "Error : Copy failed");
+	check_textures_before_map(data, copy);
 	place_character(data, copy);
 	validate_map(data, copy);
 	free_map(copy);

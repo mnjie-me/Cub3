@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:22:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 17:28:37 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:11:04 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ static void	basic_error(char *str)
 int	main(int argc, char *argv[])
 {
     t_data  data;
-    
+
 	if (argc != 2 || ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))
     != (argv[1] + ft_strlen(argv[1]) - 4))
         basic_error("Error, write: ./cub3 SCENE.cub");
