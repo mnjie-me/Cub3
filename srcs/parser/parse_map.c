@@ -6,7 +6,7 @@
 /*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 12:49:36 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/11/29 21:37:51 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2025/11/29 22:24:08 by mari-cruz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,32 +61,43 @@ char	**extract_map(char **text, int start)
 	return (copy);
 }
 
-void	check_textures_before_map(t_data *data, char **copy)
+void	check_textures_before_map(t_data *data, char **text)
 {
-	int	i;
+	int		i;
+	char	*s;
 
 	i = 0;
-	while (copy[i])
+	while (text[i])
 	{
-		if (ft_strncmp(copy[i], "NO ", 3) == 0
-			|| ft_strncmp(copy[i], "SO ", 3) == 0
-			|| ft_strncmp(copy[i], "WE ", 3) == 0
-			|| ft_strncmp(copy[i], "EA ", 3) == 0
-			|| ft_strncmp(copy[i], "F ", 2) == 0
-			|| ft_strncmp(copy[i], "C ", 2) == 0)
-			ft_end(data, "Error : missing textures before map");
+		s = text[i];
+		while (*s == ' ' || *s == '\t' || *s == '\n')
+			s++;
+		if (*s == '1')
+			break ;
 		i++;
-	}	
+	}
+	while (text[i])
+	{
+		s = text[i];
+		while (*s == ' ' || *s == '\t' || *s == '\n')
+			s++;
+		if (!ft_strncmp(s, "NO ", 3) || !ft_strncmp(s, "SO ", 3)
+			|| !ft_strncmp(s, "WE ", 3) || !ft_strncmp(s, "EA ", 3)
+			|| !ft_strncmp(s, "F ", 2) || !ft_strncmp(s, "C ", 2))
+			ft_end(data, "Error: texture found after map");
+		i++;
+	}
 }
+
 
 void	check_map(t_data *data, char **map, int *i)
 {
 	char	**copy;
 
+	check_textures_before_map(data, map);
 	copy = extract_map(map, *i);
 	if (!copy)
 		ft_end(data, "Error : Copy failed");
-	check_textures_before_map(data, copy);
 	place_character(data, copy);
 	validate_map(data, copy);
 	free_map(copy);
