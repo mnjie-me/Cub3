@@ -6,7 +6,7 @@
 /*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 18:01:46 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/11/24 17:00:14 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/02 01:36:05 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,32 @@ static void	ray_init(t_raycast *r, t_data *d, t_vec dir, int radius)
 
 static int	ray_step(t_raycast *r, t_data *d)
 {
-	double	next_x;
-	double	next_y;
+	t_vec	next;
+	int		cell_x;
 	int		cell_y;
-	int		row_len;
+	int		prev_x;
+	int		prev_y;
 
-	next_x = r->start_x + r->direcction_x * r->step;
-	next_y = r->start_y + r->direcction_y * r->step;
-	if (next_y < 0 || next_y >= minimap_height(d->map))
+	prev_x = (int)r->start_x;
+	prev_y = (int)r->start_y;
+	next.x = r->start_x + r->direcction_x * r->step;
+	next.y = r->start_y + r->direcction_y * r->step;
+	if (next.y < 0 || next.y >= minimap_height(d->map))
 		return (0);
-	cell_y = (int)next_y;
-	row_len = (int)ft_strlen(d->map[cell_y]);
-	if (next_x < 0 || next_x >= row_len)
+	cell_y = (int)next.y;
+	if (next.x < 0 || next.x >= (int)ft_strlen(d->map[cell_y]))
 		return (0);
-	if (d->map[(int)next_y][(int)next_x] == '1')
+	cell_x = (int)next.x;
+	if (d->map[cell_y][cell_x] == '1')
 		return (0);
-	r->start_x = next_x;
-	r->start_y = next_y;
+	if (cell_x != prev_x && cell_y != prev_y)
+	{
+		if ((d->map[prev_y][cell_x] == '1')
+			|| (d->map[cell_y][prev_x] == '1'))
+			return (0);
+	}
+	r->start_x = next.x;
+	r->start_y = next.y;
 	return (1);
 }
 

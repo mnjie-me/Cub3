@@ -6,7 +6,7 @@
 /*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:18:03 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/11/24 17:03:43 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/02 01:41:55 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_thick_line
 	t_posminimap	a;
 	t_posminimap	b;
 	int		color;
-	int		thickness;
+	double		thickness;
 }	t_thick_line;
 
 typedef struct s_fov
@@ -116,8 +116,7 @@ int		cell_color(char c);
 int		minimap_width(char **map);
 int		minimap_height(char **map);
 void	norm(double *dx, double *dy);
-void	draw_line(t_img *img, t_posminimap a, t_posminimap b, int color);
-void	line_thick(t_img *img, t_thick_line l);
+void	draw_line(t_data *data, t_minimap *map, t_thick_line l);
 void	cast_ray(t_data *data, t_vec dir, int radius, t_vec *out);
 void	fill_fov(t_data *data, t_minimap *map);
 void	draw_player(t_data *data, t_minimap *map);

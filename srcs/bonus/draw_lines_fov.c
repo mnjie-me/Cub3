@@ -6,65 +6,57 @@
 /*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:56:19 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/11/24 17:04:35 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/02 01:41:46 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3_bonus.h"
 
-void	draw_line(t_img *img, t_posminimap a, t_posminimap b, int color)
+void	mm_put_pixel(t_data *data, t_minimap *map, t_posminimap p, int color)
 {
-	int   steps;
-	double x;
-	double y;
-	double step_x;
-	double step_y;
+	int		map_x;
+	int		map_y;
+	char	**grid;
 
-	x = a.pos_x;
-	y = a.pos_y;
-	steps = abs(b.pos_x - a.pos_x);
-	if (steps < abs(b.pos_y - a.pos_y))
-		steps = abs(b.pos_y - a.pos_y);
-	if (steps == 0)
-	{
-		put_pixel(img, a.pos_x, a.pos_y, color);
-		return ;
-	}
-	step_x = (b.pos_x - a.pos_x) / (double)steps;
-	step_y = (b.pos_y - a.pos_y) / (double)steps;
-	while (steps-- >= 0)
-	{
-		put_pixel(img, (int)x, (int)y, color);
-		x += step_x;
-		y += step_y;
-	}
+	if (p.pos_x < 0 || p.pos_y < 0 || p.pos_x >= IMG_W || p.pos_y >= IMG_H)
+		return;
+	grid = data->map;
+	map_x = map->start_x + (p.pos_x - map->pos_minimap_x) / map->scale;
+	map_y = map->start_y + (p.pos_y - map->pos_minimap_y) / map->scale;
+	if (map_y < 0 || map_y >= minimap_height(grid))
+		return;
+	if (map_x < 0 || map_x >= (int)ft_strlen(grid[map_y]))
+		return;
+	if (grid[map_y][map_x] != '0')
+		return;
+	put_pixel(&data->img, p.pos_x, p.pos_y, color);
 }
 
-void	line_thick(t_img *img, t_thick_line l)
+void	draw_line(t_data *data, t_minimap *map, t_thick_line l)
 {
-	int		half;
-	int		i;
-	int		j;
-	t_posminimap	origin;
-	t_posminimap	dest;
+	t_posminimap	p;
+	t_vec			pos;
+	t_vec			step;
+	int				steps;
 
-	half = l.thickness / 2;
-	i = -half;
-	while (i++ <= half)
+	pos.x = l.a.pos_x;
+	pos.y = l.a.pos_y;
+	steps = abs(l.b.pos_x - l.a.pos_x);
+	if (steps < abs(l.b.pos_y - l.a.pos_y))
+		steps = abs(l.b.pos_y - l.a.pos_y);
+	if (steps == 0)
 	{
-		j = -half;
-		while (j++ <= half)
-		{
-			if (i * i + j * j > half * half)
-			{
-				j++;
-				continue ;
-			}
-			origin.pos_x = l.a.pos_x + i;
-			origin.pos_y = l.a.pos_y + j;
-			dest.pos_x = l.b.pos_x + i;
-			dest.pos_y = l.b.pos_y + j;
-			draw_line(img, origin, dest, l.color);
-		}
+		mm_put_pixel(data, map, l.a, l.color);
+		return ;
+	}
+	step.x = (l.b.pos_x - l.a.pos_x) / (double)steps;
+	step.y = (l.b.pos_y - l.a.pos_y) / (double)steps;
+	while (steps-- >= 0)
+	{
+		p.pos_x = (int)pos.x;
+		p.pos_y = (int)pos.y;
+		mm_put_pixel(data, map, p, l.color);
+		pos.x += step.x;
+		pos.y += step.y;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:26:58 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/11/24 17:03:23 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/02 01:40:35 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	fov_init(t_fov *f, t_data *data, t_minimap *map)
 	f->ly = data->pos.dir_y - data->pos.plane_y;
 	f->rx = data->pos.dir_x + data->pos.plane_x;
 	f->ry = data->pos.dir_y + data->pos.plane_y;
-	f->rays = 45;
+	f->rays = 200;
 	f->i = 0;
 	f->prev.pos_x = -1;
 	f->prev.pos_y = -1;
@@ -55,22 +55,15 @@ static void	fov_compute_hit(t_data *d, t_minimap *map, t_fov *f)
 		+ (int)((f->hy - map->start_y) * map->scale);
 }
 
-static void	fov_connect_segment(t_data *data, t_fov *f)
+static void	fov_connect_segment(t_data *data, t_minimap *map, t_fov *f)
 {
 	t_thick_line	line;
 
-	if (f->prev.pos_x == -1)
-	{
-		f->prev = f->hit;
-		return ;
-	}
 	line.a = f->center;
 	line.b = f->hit;
 	line.color = 0xE7C46A;
-	line.thickness = 2;
-	line_thick(&data->img, line);
-	draw_line(&data->img, f->prev, f->hit, 0xD9B55A);
-	f->prev = f->hit;
+	line.thickness = 1; // se ignora realmente
+	draw_line(data, map, line);
 }
 
 void	fill_fov(t_data *data, t_minimap *map)
@@ -81,7 +74,7 @@ void	fill_fov(t_data *data, t_minimap *map)
 	while (f.i <= f.rays)
 	{
 		fov_compute_hit(data, map, &f);
-		fov_connect_segment(data, &f);
+		fov_connect_segment(data, map, &f);
 		f.i++;
 	}
 }

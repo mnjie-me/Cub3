@@ -6,7 +6,7 @@
 /*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 02:22:47 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/11/24 17:00:49 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:36:27 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	init_data_mm(t_data *data, t_minimap *map)
 {
 	map->map_width = minimap_width(data->map);
 	map->map_height = minimap_height(data->map);
-	map->radius = 2;
-	map->size_mmap = 140;
+	map->radius = 4;
+	map->size_mmap = 200;
 	map->view_width = map->radius * 2 + 1;
 	if (map->view_width > map->map_width)
 		map->view_width = map->map_width;
@@ -27,8 +27,8 @@ void	init_data_mm(t_data *data, t_minimap *map)
 	map->scale = map->size_mmap / map->view_width;
 	map->height = map->scale * map->view_height;
 	map->width = map->scale * map->view_width;
-	map->pos_minimap_x = IMG_W - map->width - 20;
-	map->pos_minimap_y = 20;
+	map->pos_minimap_x = 20;
+	map->pos_minimap_y = IMG_H - map->height - 20;
 	map->start_x = (int)data->pos.pos_x - map->radius;
 	map->start_y = (int)data->pos.pos_y - map->radius;
 }
