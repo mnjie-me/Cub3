@@ -3,21 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:22:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/11/09 00:57:06 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/09 18:59:41 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3.h"
 
-int close_window(t_data *data)
+int	close_window(t_data *data)
 {
-    if (data->win)
-        mlx_destroy_window(data->mlx, data->win);
-    exit(0);
-    return (0);
+	if (data && data->mlx)
+		destroy_images(data);
+	if (data)
+		free_textures(data);
+	if (data && data->map)
+		free_map(data->map);
+	if (data && data->mlx && data->win)
+		mlx_cleanup(data);
+	exit(0);
 }
 
 int key_release(int keycode, t_data *data)

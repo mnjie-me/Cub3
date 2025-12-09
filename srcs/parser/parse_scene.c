@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:56:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 17:32:57 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/12/09 19:00:50 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,12 @@ char	**read_file(t_data *data, char **argv)
 
 void	parse_scene(t_data *data, char **argv)
 {
-	read_file(data, argv);
-	parse_config(data->map, data);
-	parse_map(data->map, data);
-	data->map[(int)data->pos.pos_y][(int)data->pos.pos_x] = '0';
+    char **text;
+
+    text = read_file(data, argv);
+    parse_config(text, data);
+    parse_map(text, data);
+    free_map(text);
+    data->map[(int)data->pos.pos_y][(int)data->pos.pos_x] = '0';
 }
+

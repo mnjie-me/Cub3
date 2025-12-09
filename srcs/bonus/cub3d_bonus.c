@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 02:23:29 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/11/24 16:47:41 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/03 21:34:24 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int close_window(t_data *data)
 {
-    if (data->win)
-        mlx_destroy_window(data->mlx, data->win);
+	if (data->win)
+    	mlx_destroy_window(data->mlx, data->win);
 	exit(0);
-    return (0);
+	return (0);
 }
 
 int key_release(int keycode, t_data *data)

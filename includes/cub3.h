@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/11/09 01:09:46 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/09 18:52:19 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,5 +171,9 @@ int			check_width(char **map, int row);
 int			check_height(char **map);
 void		ft_mlx_pixel_put(t_img *img, int x, int y, unsigned int color);
 unsigned int color_and_shade(t_data *data, t_img *tex, int tex_x, int tex_y);
+
+void	destroy_images(t_data *data);
+void	free_textures(t_data *data);
+void	mlx_cleanup(t_data *data);
 
 #endif

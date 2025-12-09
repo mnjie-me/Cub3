@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:22:53 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/11/09 01:39:01 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/09 19:00:12 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,21 @@ void	free_map(char **map)
 	free(map);
 }
 
-static void destroy_images(t_data *data)
+void	free_textures(t_data *data)
+{
+	if (!data)
+		return ;
+	free(data->tex.no);
+	free(data->tex.so);
+	free(data->tex.we);
+	free(data->tex.ea);
+	data->tex.no = NULL;
+	data->tex.so = NULL;
+	data->tex.we = NULL;
+	data->tex.ea = NULL;
+}
+
+void destroy_images(t_data *data)
 {
     int i;
 
@@ -65,7 +79,7 @@ static void destroy_images(t_data *data)
     }
 }
 
-static void mlx_cleanup(t_data *data)
+void mlx_cleanup(t_data *data)
 {
     if (!data)
         return;
@@ -89,6 +103,8 @@ int     ft_end(t_data *data, char *msg)
 {
     if (data && data->mlx)
         destroy_images(data);
+    if (data)
+        free_textures(data);
     if (data && data->map)
         free_map(data->map);
     if (data && data->mlx)

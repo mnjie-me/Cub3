@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_fov.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:26:58 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/12/02 01:40:35 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/07 18:05:29 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	fov_connect_segment(t_data *data, t_minimap *map, t_fov *f)
 	line.a = f->center;
 	line.b = f->hit;
 	line.color = 0xE7C46A;
-	line.thickness = 1; // se ignora realmente
 	draw_line(data, map, line);
 }
 
