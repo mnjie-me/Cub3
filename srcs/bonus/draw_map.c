@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:18:30 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/11/24 17:01:10 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:00:45 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static	void	draw_tile(t_data *data, t_minimap *map, t_tile tile)
 	}
 }
 
-static	void	draw_map_row(t_data *data, t_minimap *map, int view_y, char *row)
+static	void	draw_map_row(t_data *data, t_minimap *map,
+	int view_y, char *row)
 {
 	int		row_len;
 	int		x;
@@ -57,7 +58,7 @@ static	void	draw_map_row(t_data *data, t_minimap *map, int view_y, char *row)
 	}
 }
 
-void draw_short_map(t_data *data, t_minimap *map)
+void	draw_short_map(t_data *data, t_minimap *map)
 {
 	int		y;
 	int		map_y;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_minimap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 18:01:46 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/12/02 01:36:05 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/12 21:08:59 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ static void	ray_init(t_raycast *r, t_data *d, t_vec dir, int radius)
 	norm(&r->direcction_x, &r->direcction_y);
 }
 
+static	int	check_ray(t_vec next, t_data *d, int *cell_y, int *cell_x)
+{
+	if (next.y < 0 || next.y >= minimap_height(d->map))
+		return (0);
+	*cell_y = (int)next.y;
+	if (next.x < 0 || next.x >= (int)ft_strlen(d->map[*cell_y]))
+		return (0);
+	*cell_x = (int)next.x;
+	return (1);
+}
+
 static int	ray_step(t_raycast *r, t_data *d)
 {
 	t_vec	next;
@@ -35,12 +46,8 @@ static int	ray_step(t_raycast *r, t_data *d)
 	prev_y = (int)r->start_y;
 	next.x = r->start_x + r->direcction_x * r->step;
 	next.y = r->start_y + r->direcction_y * r->step;
-	if (next.y < 0 || next.y >= minimap_height(d->map))
+	if (!check_ray(next, d, &cell_y, &cell_x))
 		return (0);
-	cell_y = (int)next.y;
-	if (next.x < 0 || next.x >= (int)ft_strlen(d->map[cell_y]))
-		return (0);
-	cell_x = (int)next.x;
 	if (d->map[cell_y][cell_x] == '1')
 		return (0);
 	if (cell_x != prev_x && cell_y != prev_y)

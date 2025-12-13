@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_lines_fov.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 14:56:19 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/12/02 01:41:46 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:59:54 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	mm_put_pixel(t_data *data, t_minimap *map, t_posminimap p, int color)
 	char	**grid;
 
 	if (p.pos_x < 0 || p.pos_y < 0 || p.pos_x >= IMG_W || p.pos_y >= IMG_H)
-		return;
+		return ;
 	grid = data->map;
 	map_x = map->start_x + (p.pos_x - map->pos_minimap_x) / map->scale;
 	map_y = map->start_y + (p.pos_y - map->pos_minimap_y) / map->scale;
 	if (map_y < 0 || map_y >= minimap_height(grid))
-		return;
+		return ;
 	if (map_x < 0 || map_x >= (int)ft_strlen(grid[map_y]))
-		return;
+		return ;
 	if (grid[map_y][map_x] != '0')
-		return;
+		return ;
 	put_pixel(&data->img, p.pos_x, p.pos_y, color);
 }
 

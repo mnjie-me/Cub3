@@ -1,24 +1,24 @@
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																						/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/21 14:40:13 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/12/01 20:35:29 by anruiz-d         ###   ########.fr       */
+/*   Created: 2025/12/12 21:11:20 by ana               #+#    #+#             */
+/*   Updated: 2025/12/12 21:11:49 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3_bonus.h"
 
-int cell_color(char c)
+int	cell_color(char c)
 {
-    if (c == '1')
-        return (0x6E6E6E);
-    if (c == ' ' || c == '\r' || c == '\t' || c == '\n')
-        return (0x2A2A2A);
-    return (0xEDEDED);
+	if (c == '1')
+		return (0x6E6E6E);
+	if (c == ' ' || c == '\r' || c == '\t' || c == '\n')
+		return (0x2A2A2A);
+	return (0xEDEDED);
 }
 
 int	minimap_width(char **map)
@@ -39,6 +39,7 @@ int	minimap_width(char **map)
 	}
 	return (width);
 }
+
 int	minimap_height(char **map)
 {
 	int	i;
@@ -49,24 +50,24 @@ int	minimap_height(char **map)
 	return (i);
 }
 
-void norm(double *dx, double *dy)
+void	norm(double *dx, double *dy)
 {
-    double len;
+	double	len;
 
-    len = sqrt((*dx) * (*dx) + (*dy) * (*dy));
-    if (len > 0.00001)
-    {
-        *dx /= len;
-        *dy /= len;
-    }
+	len = sqrt((*dx) * (*dx) + (*dy) * (*dy));
+	if (len > 0.00001)
+	{
+		*dx /= len;
+		*dy /= len;
+	}
 }
 
-void put_pixel(t_img *img, int x, int y, int color)
+void	put_pixel(t_img *img, int x, int y, int color)
 {
-    char *dst;
+	char	*dst;
 
-    if (x < 0 || y < 0 || x >= IMG_W || y >= IMG_H)
-        return;
-    dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-    *(unsigned int *)dst = color;
+	if (x < 0 || y < 0 || x >= IMG_W || y >= IMG_H)
+		return ;
+	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
 }

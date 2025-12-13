@@ -6,7 +6,7 @@
 /*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/12/09 18:52:19 by ana              ###   ########.fr       */
+/*   Updated: 2025/12/13 02:14:17 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,5 +175,10 @@ unsigned int color_and_shade(t_data *data, t_img *tex, int tex_x, int tex_y);
 void	destroy_images(t_data *data);
 void	free_textures(t_data *data);
 void	mlx_cleanup(t_data *data);
+
+int		close_window(t_data *data);
+void	clear_image(t_img *img);
+void	init_data(t_data *data);
+
 
 #endif

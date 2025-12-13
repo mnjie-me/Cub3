@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 02:22:47 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/11/25 15:36:27 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:27:27 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,32 +56,38 @@ void	conf_view_map(t_minimap *map)
 	map->start_y = player_y;
 }
 
+static	t_rect	fill_color_mm(t_minimap *map, int padding,
+	int size_extra, int color)
+{
+	t_rect	rect;
+
+	rect.start_x = map->pos_minimap_x - padding;
+	rect.start_y = map->pos_minimap_y - padding;
+	rect.width = map->width + size_extra;
+	rect.height = map->height + size_extra;
+	rect.color = color;
+	return (rect);
+}
+
 void	minimap_rect(t_img *img, t_minimap *map, t_layer layer)
 {
 	t_rect	rect;
 
 	if (layer == BACKGROUND)
-	{
-		rect.start_x = map->pos_minimap_x - 6;
-		rect.start_y = map->pos_minimap_y - 6;
-		rect.width = map->width + 12;
-		rect.height = map->height + 12;
-		rect.color = 0x454545;
-	}
+		rect = fill_color_mm(map, 6, 12, 0x454545);
 	else if (layer == BORDER)
+		rect = fill_color_mm(map, 4, 8, 0x2A2A2A);
+	rect.y = 0;
+	while (rect.y < rect.height)
 	{
-		rect.start_x = map->pos_minimap_x - 4;
-		rect.start_y = map->pos_minimap_y - 4;
-		rect.width = map->width + 8;
-		rect.height = map->height + 8;
-		rect.color = 0x2A2A2A;
-	}
-	rect.y = -1;
-	while (++rect.y < rect.height)
-	{
-		rect.x = -1;
-		while (++rect.x < rect.width)
-			put_pixel(img, rect.start_x + rect.x, rect.start_y + rect.y, rect.color);
+		rect.x = 0;
+		while (rect.x < rect.width)
+		{
+			put_pixel(img, rect.start_x + rect.x, rect.start_y
+				+ rect.y, rect.color);
+			rect.x++;
+		}
+		rect.y++;
 	}
 }
 

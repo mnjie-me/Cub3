@@ -6,7 +6,7 @@
 /*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:56:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/12/09 19:00:50 by ana              ###   ########.fr       */
+/*   Updated: 2025/12/12 21:18:39 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,15 @@ char	**read_file(t_data *data, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_end(data, "Error: File could not be opened");
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line)
 	{
 		data->map = ft_realloc(data->map,
 				sizeof(char *) * count, sizeof(char *) * (count + 1));
 		if (!data->map)
 			ft_end(data, "Error: Malloc failed");
 		data->map[count++] = line;
+		line = get_next_line(fd);
 	}
 	data->map = ft_realloc(data->map,
 			sizeof(char *) * count, sizeof(char *) * (count + 1));
@@ -91,12 +93,11 @@ char	**read_file(t_data *data, char **argv)
 
 void	parse_scene(t_data *data, char **argv)
 {
-    char **text;
+	char	**text;
 
-    text = read_file(data, argv);
-    parse_config(text, data);
-    parse_map(text, data);
-    free_map(text);
-    data->map[(int)data->pos.pos_y][(int)data->pos.pos_x] = '0';
+	text = read_file(data, argv);
+	parse_config(text, data);
+	parse_map(text, data);
+	free_map(text);
+	data->map[(int)data->pos.pos_y][(int)data->pos.pos_x] = '0';
 }
-

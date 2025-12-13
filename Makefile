@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anruiz-d <anruiz-d@student.42madrid.com    +#+  +:+       +#+         #
+#    By: ana <ana@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/05 01:21:59 by anruiz-d          #+#    #+#              #
-#    Updated: 2025/11/21 19:01:44 by anruiz-d         ###   ########.fr        #
+#    Updated: 2025/12/13 02:15:09 by ana              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,11 +42,14 @@ SRC_FILES = parser/parse_scene.c \
 			parser/utils_map.c \
             parser/validate_map.c \
 			parser/utils_validate.c \
+			engine/init_data.c \
             engine/raycast.c \
 			engine/utils.c \
 			engine/draw_wall.c \
 			engine/textures.c \
-			engine/player.c
+			engine/player.c \
+			clean/utils_clean.c \
+			clean/utils_free.c
 
 SRC_MAIN	= cub3.c
 
