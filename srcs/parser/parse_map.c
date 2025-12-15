@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 12:49:36 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 16:21:11 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:40:33 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,39 @@ char	**extract_map(char **text, int start)
 	return (copy);
 }
 
+static	void	check_textures_before_map(t_data *data, char **text)
+{
+	int		i;
+	char	*s;
+
+	i = 0;
+	while (text[i])
+	{
+		s = text[i];
+		while (*s == ' ' || *s == '\t' || *s == '\n')
+			s++;
+		if (*s == '1')
+			break ;
+		i++;
+	}
+	while (text[i])
+	{
+		s = text[i];
+		while (*s == ' ' || *s == '\t' || *s == '\n')
+			s++;
+		if (!ft_strncmp(s, "NO ", 3) || !ft_strncmp(s, "SO ", 3)
+			|| !ft_strncmp(s, "WE ", 3) || !ft_strncmp(s, "EA ", 3)
+			|| !ft_strncmp(s, "F ", 2) || !ft_strncmp(s, "C ", 2))
+			ft_end(data, "Error: texture found after map");
+		i++;
+	}
+}
+
 void	check_map(t_data *data, char **map, int *i)
 {
 	char	**copy;
 
+	check_textures_before_map(data, map);
 	copy = extract_map(map, *i);
 	if (!copy)
 		ft_end(data, "Error : Copy failed");
