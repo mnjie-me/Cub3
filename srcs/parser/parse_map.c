@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 12:49:36 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/11/29 22:24:08 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2026/01/12 16:16:23 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**extract_map(char **text, int start)
 	return (copy);
 }
 
-void	check_textures_before_map(t_data *data, char **text)
+static	void	check_textures_before_map(t_data *data, char **text)
 {
 	int		i;
 	char	*s;
@@ -88,7 +88,6 @@ void	check_textures_before_map(t_data *data, char **text)
 		i++;
 	}
 }
-
 
 void	check_map(t_data *data, char **map, int *i)
 {
