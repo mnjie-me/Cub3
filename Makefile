@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ana <ana@student.42.fr>                    +#+  +:+       +#+         #
+#    By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/05 01:21:59 by anruiz-d          #+#    #+#              #
-#    Updated: 2025/12/13 02:15:09 by ana              ###   ########.fr        #
+#    Updated: 2026/01/12 14:46:08 by anruiz-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,12 +55,12 @@ SRC_MAIN	= cub3.c
 
 SRC_FILES_BONUS	=	bonus/cub3d_bonus.c	\
 					bonus/minimap_bonus.c \
-					bonus/draw_map.c \
-					bonus/draw_fov.c \
+					bonus/draw_map_bonus.c \
+					bonus/draw_fov_bonus.c \
 					bonus/utils_bonus.c \
 					bonus/draw_player_bonus.c \
-					bonus/draw_lines_fov.c \
-					bonus/raycast_minimap.c 
+					bonus/draw_lines_fov_bonus.c \
+					bonus/raycast_minimap_bonus.c 
 
 # --- Object Files --- #
 
