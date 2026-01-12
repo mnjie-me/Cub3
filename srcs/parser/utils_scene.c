@@ -6,7 +6,7 @@
 /*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:22:53 by mari-cruz         #+#    #+#             */
-/*   Updated: 2026/01/12 16:40:15 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2026/01/12 18:02:14 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_texture_path(char *path, t_data *data)
 {
-	int	fd;
+	int		fd;
 	size_t	len;
 
 	if (!path)
