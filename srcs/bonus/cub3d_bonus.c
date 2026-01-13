@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 02:23:29 by anruiz-d          #+#    #+#             */
-/*   Updated: 2025/12/13 02:17:54 by ana              ###   ########.fr       */
+/*   Updated: 2026/01/13 15:14:52 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3_bonus.h"
-
-int	key_release(int keycode, t_data *data)
-{
-	if (keycode == W_KEY)
-		data->keys.w = 0;
-	else if (keycode == A_KEY)
-		data->keys.a = 0;
-	else if (keycode == S_KEY)
-		data->keys.s = 0;
-	else if (keycode == D_KEY)
-		data->keys.d = 0;
-	return (0);
-}
-
-int	key_press(int keycode, t_data *data)
-{
-	if (keycode == W_KEY)
-		data->keys.w = 1;
-	else if (keycode == A_KEY)
-		data->keys.a = 1;
-	else if (keycode == S_KEY)
-		data->keys.s = 1;
-	else if (keycode == D_KEY)
-		data->keys.d = 1;
-	else if (keycode == ESC_KEY)
-		close_window(data);
-	return (0);
-}
 
 int	render_loop(t_data *data)
 {
@@ -52,7 +24,11 @@ int	render_loop(t_data *data)
 		move_player(data, W_KEY, move_speed);
 	if (data->keys.s)
 		move_player(data, S_KEY, move_speed);
-	if (data->keys.a || data->keys.d)
+	if (data->keys.a)
+		move_player(data, A_KEY, move_speed);
+	if (data->keys.d)
+		move_player(data, D_KEY, move_speed);
+	if (data->keys.left || data->keys.right)
 		rotate_player(data, rot_speed);
 	raycast(data);
 	draw_minimap(data);
@@ -72,7 +48,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2 || ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))
 		!= (argv[1] + ft_strlen(argv[1]) - 4))
-		basic_error("Error, write: ./cub3 SCENE.cub");
+		basic_error("Error, write: ./cub3_bonus SCENE.cub");
 	init_data(&data);
 	parse_scene(&data, argv);
 	data.mlx = mlx_init();

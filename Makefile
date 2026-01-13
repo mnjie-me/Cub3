@@ -6,7 +6,7 @@
 #    By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/05 01:21:59 by anruiz-d          #+#    #+#              #
-#    Updated: 2026/01/12 14:46:08 by anruiz-d         ###   ########.fr        #
+#    Updated: 2026/01/13 15:08:14 by anruiz-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRC_FILES = parser/parse_scene.c \
 			engine/draw_wall.c \
 			engine/textures.c \
 			engine/player.c \
+			control_keys/control_keys.c \
 			clean/utils_clean.c \
 			clean/utils_free.c
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2026/01/13 12:52:02 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2026/01/13 15:12:17 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,5 +184,7 @@ void			mlx_cleanup(t_data *data);
 int				close_window(t_data *data);
 void			clear_image(t_img *img);
 void			init_data(t_data *data);
-
+// CONTROL KEYS
+int				key_release(int keycode, t_data *data);
+int				key_press(int keycode, t_data *data);
 #endif
