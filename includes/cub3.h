@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/12/13 22:23:05 by ana              ###   ########.fr       */
+/*   Updated: 2026/01/13 12:52:02 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@
 #  include <X11/keysym.h>
 #  include <X11/X.h>
 #  define IS_LINUX
-#  define W_KEY    119
-#  define A_KEY    97
-#  define S_KEY    115
-#  define D_KEY    100
-#  define ESC_KEY  65307
+#  define W_KEY			119
+#  define A_KEY			97
+#  define S_KEY			115
+#  define D_KEY			100
+#  define LEFT_ARROW	65361
+#  define RIGHT_ARROW	65363
+#  define ESC_KEY		65307
 # endif
 
 typedef struct s_keys
@@ -51,6 +53,8 @@ typedef struct s_keys
 	int			a;
 	int			s;
 	int			d;
+	int			left;
+	int			right;
 }	t_keys;
 
 typedef struct s_img

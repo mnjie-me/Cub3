@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 02:08:24 by ana               #+#    #+#             */
-/*   Updated: 2025/12/13 02:08:47 by ana              ###   ########.fr       */
+/*   Updated: 2026/01/13 12:58:54 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,6 @@ void	init_data(t_data *data)
 	data->keys.a = 0;
 	data->keys.s = 0;
 	data->keys.d = 0;
+	data->keys.left = 0;
+	data->keys.right = 0;
 }

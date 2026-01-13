@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:22:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2026/01/12 16:15:59 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2026/01/13 12:49:51 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	key_release(int keycode, t_data *data)
 		data->keys.s = 0;
 	else if (keycode == D_KEY)
 		data->keys.d = 0;
+	else if (keycode == LEFT_ARROW)
+		data->keys.left = 0;
+	else if (keycode == RIGHT_ARROW)
+		data->keys.right = 0;
 	return (0);
 }
 
@@ -35,6 +39,10 @@ int	key_press(int keycode, t_data *data)
 		data->keys.s = 1;
 	else if (keycode == D_KEY)
 		data->keys.d = 1;
+	else if (keycode == LEFT_ARROW)
+		data->keys.left = 1;
+	else if (keycode == RIGHT_ARROW)
+		data->keys.right = 1;
 	else if (keycode == ESC_KEY)
 		close_window(data);
 	return (0);
@@ -52,7 +60,11 @@ int	render_loop(t_data *data)
 		move_player(data, W_KEY, move_speed);
 	if (data->keys.s)
 		move_player(data, S_KEY, move_speed);
-	if (data->keys.a || data->keys.d)
+	if (data->keys.a)
+		move_player(data, A_KEY, move_speed);
+	if (data->keys.d)
+		move_player(data, D_KEY, move_speed);
+	if (data->keys.left || data->keys.right)
 		rotate_player(data, rot_speed);
 	raycast(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
