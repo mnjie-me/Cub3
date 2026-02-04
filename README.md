@@ -1,10 +1,10 @@
-This project has been created as part of the 42 curriculum by mnjie-me and anruiz-d.
+*This project was created as part of the 42 curriculum by mnjie-me and anruiz-d.*
 
 <h1>Cub3D</h1>
 
 <h2>Description</h2>
-<p>Cub3D is a raycasting project where you simulate a 3D view using a 2D grid map, similar to how early 3D games like Wolfenstein 3D worked.
-The objective is to create a first-person environment using only:</p>
+<p>Cub3D is a raycasting project that simulates a 3D view using a 2D grid map, similar to how early 3D games like Wolfenstein 3D worked.
+The aim is to create a first-person environment using only:</p>
 <ol>
 	<li>A 2D map</li>
 	<li>Raycasting to determine visibility</li>
@@ -12,7 +12,7 @@ The objective is to create a first-person environment using only:</p>
 </ol>
 
 <h2>Instructions</h2>
-<p>The steps for compilation, installation, and execution would be:</p>
+<p>Steps for compilation, installation, and execution:</p>
 <li>Clone the repository/li>
 
 ```
@@ -34,7 +34,7 @@ make
 make bonus
 ```
 
-<li>Finally, to run the program we will do the following</li>
+<li>Finally, to run the program, write the following</li>
 
 ````
 ./Cub3D scene.cub
