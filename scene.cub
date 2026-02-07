@@ -3,7 +3,7 @@ SO srcs/textures/SO.xpm
 WE srcs/textures/WE.xpm
 EA srcs/textures/EA.xpm
 
-F 200,256,90
+F 150,100,50
 C 135,206,235
 
 11111111111

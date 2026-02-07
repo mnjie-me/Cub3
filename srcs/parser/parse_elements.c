@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 15:17:06 by mari-cruz         #+#    #+#             */
-/*   Updated: 2026/02/07 17:55:38 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2026/02/07 19:20:10 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,15 @@ void	check_elements(t_data *data)
 	if (data->colors.ceil == -1)
 		append_error(&msg, "Error: Missing ceiling color");
 	if (msg)
-		ft_end(data, NULL, msg);
+	{
+		write(2, msg, ft_strlen(msg));
+		write(2, "\n", 1);
+		free(msg);
+		ft_end(data, NULL, NULL);
+	}
 }
 
-int	check_value(char *num, t_data *data)
+int	check_value(char *num, char **rgb, t_data *data)
 {
 	int	i;
 	int	result;
@@ -41,17 +46,20 @@ int	check_value(char *num, t_data *data)
 	i = 0;
 	result = 0;
 	if (!num)
-		ft_end(data, NULL,  "Error: RGB value does not exist");
+		ft_end(data, NULL, "Error: RGB value does not exist");
 	while (num[i])
 	{
 		if ((num[i] < '0' || num[i] > '9') && num[i] != '\n')
+		{
+			free_split(rgb);
 			ft_end(data, NULL, "Error: Invalid RGB value");
+		}
 		i++;
 	}
 	result = ft_atoi(num);
 	if (result < 0 || result > 255)
 	{
-		free(num);
+		free_split(rgb);
 		ft_end(data, NULL, "Error: RGB value out of range");
 	}
 	return (result);
@@ -66,24 +74,24 @@ void	parse_rgb(t_data *data, char *line, int *j)
 	int		b;
 
 	id = line[*j];
-	if (line[*j + 1] == ' ')
-	{
-		(*j)++;
-		skip_spaces(line, j);
-		rgb = ft_split(line + *j, ',');
-		if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-			ft_end(data, NULL, "Error: Invalid RGB format");
-		r = check_value(rgb[0], data);
-		g = check_value(rgb[1], data);
-		b = check_value(rgb[2], data);
-		if (id == 'F')
-			data->colors.floor = (r << 16) | (g << 8) | b;
-		else if (id == 'C')
-			data->colors.ceil = (r << 16) | (g << 8) | b;
-		free_split(rgb);
-	}
-	else
+	if (line[*j + 1] != ' ')
 		ft_end(data, NULL, "Error: Invalid RGB identifier");
+	(*j)++;
+	skip_spaces(line, j);
+	rgb = ft_split(line + *j, ',');
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
+	{
+		free_split(rgb);
+		ft_end(data, NULL, "Error: Invalid RGB format");
+	}
+	r = check_value(rgb[0], rgb, data);
+	g = check_value(rgb[1], rgb, data);
+	b = check_value(rgb[2], rgb, data);
+	if (id == 'F')
+		data->colors.floor = (r << 16) | (g << 8) | b;
+	else if (id == 'C')
+		data->colors.ceil = (r << 16) | (g << 8) | b;
+	free_split(rgb);
 }
 
 void	parse_textures(t_data *data, char *line, int *j)

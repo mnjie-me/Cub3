@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:56:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2026/02/07 17:50:04 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2026/02/07 18:31:22 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	parse_map(char **map, t_data *data)
 		while (map[i] && is_empty_line(map[i]))
 			i++;
 		if (!map[i])
-			ft_end(data, NULL,"Error: No map found");
+			ft_end(data, NULL, "Error: No map found");
 		skip_spaces(map[i], &j);
 	}
 	if (!map[i])

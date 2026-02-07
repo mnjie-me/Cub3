@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 12:49:36 by mari-cruz         #+#    #+#             */
-/*   Updated: 2026/02/07 17:48:48 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2026/02/07 18:31:06 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static	void	check_textures_before_map(t_data *data, char **text)
 		if (!ft_strncmp(s, "NO ", 3) || !ft_strncmp(s, "SO ", 3)
 			|| !ft_strncmp(s, "WE ", 3) || !ft_strncmp(s, "EA ", 3)
 			|| !ft_strncmp(s, "F ", 2) || !ft_strncmp(s, "C ", 2))
-			ft_end(data, NULL,"Error: texture found after map");
+			ft_end(data, NULL, "Error: texture found after map");
 		i++;
 	}
 }
@@ -96,11 +96,11 @@ void	check_map(t_data *data, char **map, int *i)
 	check_textures_before_map(data, map);
 	copy = extract_map(map, *i);
 	if (!copy)
-		ft_end(data, NULL,"Error : Copy failed");
+		ft_end(data, NULL, "Error : Copy failed");
 	place_character(data, copy);
 	validate_map(data, copy);
 	free_map(copy);
 	data->map = extract_map(map, *i);
 	if (!data->map)
-		ft_end(data, NULL,"Error : data->map malloc failed");
+		ft_end(data, NULL, "Error : data->map malloc failed");
 }
