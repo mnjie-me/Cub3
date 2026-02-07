@@ -6,7 +6,7 @@
 /*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:01:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2026/01/13 15:12:17 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:45:26 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void			check_map(t_data *data, char **map, int *i);
 void			validate_map(t_data *data, char **copy);
 
 // PARSER UTILS
-int				ft_end(t_data *data, char *str);
+int				ft_end(t_data *data, char **copy, char *str);
 char			skip_spaces(char *map, int *j);
 int				is_empty_line(char *line);
 void			append_error(char **msg, char *new_msg);

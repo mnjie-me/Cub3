@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 13:03:59 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 16:06:36 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:51:32 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	flood_fill(t_data *data, char **copy, int x, int y)
 {
 	if (y < 0 || y >= IMG_H)
-		ft_end(data, "Error: Out of border (y)");
+		ft_end(data, copy, "Error: Out of border (y)");
 	if (x < 0 || x >= IMG_W)
-		ft_end(data, "Error: Out of border (x)");
+		ft_end(data, copy, "Error: Out of border (x)");
 	if (copy[y][x] == ' ' || copy[y][x] == '\n')
-		ft_end(data, "Error: Open border (space)");
+		ft_end(data, copy, "Error: Open border (space)");
 	if (copy[y][x] == 'N' || copy[y][x] == 'S' ||
 		copy[y][x] == 'W' || copy[y][x] == 'E' ||
 		copy[y][x] == '0')
@@ -56,9 +56,9 @@ static void	check_column_edges(t_data *data, char **copy, int x, int total_rows)
 			break ;
 	}
 	if (start > end)
-		ft_end(data, "Error: Empty or invalid column in map");
+		ft_end(data, copy, "Error: Empty or invalid column in map");
 	if (copy[start][x] != '1' || copy[end][x] != '1')
-		ft_end(data, "Error: Map not closed in columns");
+		ft_end(data, copy, "Error: Map not closed in columns");
 }
 
 void	validate_columns(t_data *data, char **copy)
@@ -97,9 +97,9 @@ void	validate_rows(t_data *data, char **copy)
 			|| copy[y][end] == '\t' || copy[y][end] == '\n'))
 			end--;
 		if (start > end)
-			ft_end(data, "Error: Empty line in map");
+			ft_end(data, copy, "Error: Empty line in map");
 		if (copy[y][start] != '1' || copy[y][end] != '1')
-			ft_end(data, "Error: Map not closed in rows");
+			ft_end(data, copy, "Error: Map not closed in rows");
 		y++;
 	}
 }

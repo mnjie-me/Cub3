@@ -6,7 +6,7 @@
 /*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 11:56:40 by mari-cruz         #+#    #+#             */
-/*   Updated: 2026/01/12 16:16:16 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:50:04 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	parse_map(char **map, t_data *data)
 		while (map[i] && is_empty_line(map[i]))
 			i++;
 		if (!map[i])
-			ft_end(data, "Error: No map found");
+			ft_end(data, NULL,"Error: No map found");
 		skip_spaces(map[i], &j);
 	}
 	if (!map[i])
-		ft_end(data, "Error: Invalid map");
+		ft_end(data, NULL, "Error: Invalid map");
 	check_map(data, map, &i);
 }
 
@@ -71,21 +71,21 @@ char	**read_file(t_data *data, char **argv)
 	count = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		ft_end(data, "Error: File could not be opened");
+		ft_end(data, NULL, "Error: File could not be opened");
 	line = get_next_line(fd);
 	while (line)
 	{
 		data->map = ft_realloc(data->map,
 				sizeof(char *) * count, sizeof(char *) * (count + 1));
 		if (!data->map)
-			ft_end(data, "Error: Malloc failed");
+			ft_end(data, NULL, "Error: Malloc failed");
 		data->map[count++] = line;
 		line = get_next_line(fd);
 	}
 	data->map = ft_realloc(data->map,
 			sizeof(char *) * count, sizeof(char *) * (count + 1));
 	if (!data->map)
-		ft_end(data, "Error: Malloc failed");
+		ft_end(data, NULL, "Error: Malloc failed");
 	data->map[count] = NULL;
 	close(fd);
 	return (data->map);

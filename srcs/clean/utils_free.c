@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 02:06:14 by ana               #+#    #+#             */
-/*   Updated: 2025/12/13 02:18:54 by ana              ###   ########.fr       */
+/*   Updated: 2026/02/07 17:45:57 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_textures(t_data *data)
 	data->tex.ea = NULL;
 }
 
-int	ft_end(t_data *data, char *msg)
+int	ft_end(t_data *data, char **copy, char *msg)
 {
 	if (data && data->mlx)
 		destroy_images(data);
@@ -48,5 +48,7 @@ int	ft_end(t_data *data, char *msg)
 		mlx_cleanup(data);
 	if (msg)
 		ft_printf("%s\n", msg);
+	if (copy)
+		free_map(copy);
 	exit(EXIT_FAILURE);
 }

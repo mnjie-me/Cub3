@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:16:37 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 16:10:36 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:50:34 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_character(t_data *data, char **copy)
 		{
 			skip_spaces(copy[y], &x);
 			if (ft_cmp(copy[y][x], "01NSWE") == 1)
-				ft_end(data, "Error : Wrong identifier");
+				ft_end(data, copy, "Error : Wrong identifier");
 			if (ft_cmp(copy[y][x], "NSWE") == 0)
 				count++;
 			x++;
@@ -35,9 +35,9 @@ void	check_character(t_data *data, char **copy)
 		y++;
 	}
 	if (count > 1)
-		ft_end(data, "Error : Too many characters");
+		ft_end(data, copy, "Error : Too many characters");
 	if (count < 1)
-		ft_end(data, "Error : Character not found");
+		ft_end(data, copy, "Error : Character not found");
 }
 
 void	check_plane(t_data *data)

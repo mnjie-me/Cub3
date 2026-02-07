@@ -6,7 +6,7 @@
 /*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:22:53 by mari-cruz         #+#    #+#             */
-/*   Updated: 2026/01/12 18:02:14 by anruiz-d         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:50:51 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	check_texture_path(char *path, t_data *data)
 	size_t	len;
 
 	if (!path)
-		ft_end(data, "Error : Missing texture path");
+		ft_end(data, NULL, "Error : Missing texture path");
 	len = ft_strlen(path);
 	if (len < 4 || ft_strnstr(path, ".xpm", len) != (path + len - 4))
-		ft_end(data, "Error : Missing texture path");
+		ft_end(data, NULL, "Error : Missing texture path");
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		ft_end(data, "Error : Invalid texture path");
+		ft_end(data, NULL, "Error : Invalid texture path");
 	close(fd);
 }
 

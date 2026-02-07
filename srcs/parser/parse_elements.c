@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anruiz-d <anruiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 15:17:06 by mari-cruz         #+#    #+#             */
-/*   Updated: 2026/02/07 17:42:30 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:55:38 by anruiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	check_elements(t_data *data)
 	if (data->colors.ceil == -1)
 		append_error(&msg, "Error: Missing ceiling color");
 	if (msg)
-		ft_end(data, msg);
+		ft_end(data, NULL, msg);
 }
 
 int	check_value(char *num, t_data *data)
@@ -41,16 +41,19 @@ int	check_value(char *num, t_data *data)
 	i = 0;
 	result = 0;
 	if (!num)
-		ft_end(data, "Error: RGB value does not exist");
+		ft_end(data, NULL,  "Error: RGB value does not exist");
 	while (num[i])
 	{
 		if ((num[i] < '0' || num[i] > '9') && num[i] != '\n')
-			ft_end(data, "Error: Invalid RGB value");
+			ft_end(data, NULL, "Error: Invalid RGB value");
 		i++;
 	}
 	result = ft_atoi(num);
 	if (result < 0 || result > 255)
-		ft_end(data, "Error: RGB value out of range");
+	{
+		free(num);
+		ft_end(data, NULL, "Error: RGB value out of range");
+	}
 	return (result);
 }
 
@@ -69,7 +72,7 @@ void	parse_rgb(t_data *data, char *line, int *j)
 		skip_spaces(line, j);
 		rgb = ft_split(line + *j, ',');
 		if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-			ft_end(data, "Error: Invalid RGB format");
+			ft_end(data, NULL, "Error: Invalid RGB format");
 		r = check_value(rgb[0], data);
 		g = check_value(rgb[1], data);
 		b = check_value(rgb[2], data);
@@ -80,7 +83,7 @@ void	parse_rgb(t_data *data, char *line, int *j)
 		free_split(rgb);
 	}
 	else
-		ft_end(data, "Error: Invalid RGB identifier");
+		ft_end(data, NULL, "Error: Invalid RGB identifier");
 }
 
 void	parse_textures(t_data *data, char *line, int *j)
@@ -96,7 +99,7 @@ void	parse_textures(t_data *data, char *line, int *j)
 		(*j)++;
 		skip_spaces(line, j);
 		if (!line[*j])
-			ft_end(data, "Error: Missing texture path");
+			ft_end(data, NULL, "Error: Missing texture path");
 		if (id == 'N')
 			data->tex.no = ft_strdup_trim(line + *j);
 		else if (id == 'S')
@@ -107,7 +110,7 @@ void	parse_textures(t_data *data, char *line, int *j)
 			data->tex.ea = ft_strdup_trim(line + *j);
 	}
 	else
-		ft_end(data, "Error: Invalid texture identifier");
+		ft_end(data, NULL, "Error: Invalid texture identifier");
 }
 
 void	check_identifier(t_data *data, char **map, int *i, int *j)
@@ -129,9 +132,9 @@ void	check_identifier(t_data *data, char **map, int *i, int *j)
 	else if (map[*i][*j] == 'C')
 		id = 5;
 	else
-		ft_end(data, "Error : Wrong identifier");
+		ft_end(data, NULL, "Error : Wrong identifier");
 	if (flags[id] == 1)
-		ft_end(data, "Error : Duplicate identifier");
+		ft_end(data, NULL, "Error : Duplicate identifier");
 	flags[id] = 1;
 	if (id == 4 || id == 5)
 		parse_rgb(data, map[*i], j);
