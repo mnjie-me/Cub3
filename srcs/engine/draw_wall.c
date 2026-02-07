@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 19:05:57 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/10/24 16:52:34 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:40:41 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	draw_wall_pixels(t_data *data, t_img *tex, int x)
 	double	step;
 	double	tex_pos;
 
-	if (data->ray.side == 0)
-		tex_x = (int)(data->ray.wall_x * (double)(tex->width - 1));
-	else
+	tex_x = (int)(data->ray.wall_x * (double)(tex->width - 1));
+	if ((data->ray.side == 0 && data->ray.ray_dir_x < 0)
+		|| (data->ray.side == 1 && data->ray.ray_dir_y > 0))
 		tex_x = (int)((1.0 - data->ray.wall_x) * (double)(tex->width - 1));
 	step = (double)tex->height / data->draw.wall_height;
 	tex_pos = (data->draw.start - IMG_H / 2.0

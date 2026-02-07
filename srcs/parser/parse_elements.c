@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mari-cruz <mari-cruz@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 15:17:06 by mari-cruz         #+#    #+#             */
-/*   Updated: 2025/11/29 21:36:02 by mari-cruz        ###   ########.fr       */
+/*   Updated: 2026/02/07 17:42:30 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_elements(t_data *data)
 		ft_end(data, msg);
 }
 
-int	check_value(char *num)
+int	check_value(char *num, t_data *data)
 {
 	int	i;
 	int	result;
@@ -41,16 +41,16 @@ int	check_value(char *num)
 	i = 0;
 	result = 0;
 	if (!num)
-		perror("Error: RGB value does not exist");
+		ft_end(data, "Error: RGB value does not exist");
 	while (num[i])
 	{
 		if ((num[i] < '0' || num[i] > '9') && num[i] != '\n')
-			perror("Error: Invalid RGB value");
+			ft_end(data, "Error: Invalid RGB value");
 		i++;
 	}
 	result = ft_atoi(num);
 	if (result < 0 || result > 255)
-		perror("Error: RGB value out of range");
+		ft_end(data, "Error: RGB value out of range");
 	return (result);
 }
 
@@ -70,9 +70,9 @@ void	parse_rgb(t_data *data, char *line, int *j)
 		rgb = ft_split(line + *j, ',');
 		if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
 			ft_end(data, "Error: Invalid RGB format");
-		r = check_value(rgb[0]);
-		g = check_value(rgb[1]);
-		b = check_value(rgb[2]);
+		r = check_value(rgb[0], data);
+		g = check_value(rgb[1], data);
+		b = check_value(rgb[2], data);
 		if (id == 'F')
 			data->colors.floor = (r << 16) | (g << 8) | b;
 		else if (id == 'C')
